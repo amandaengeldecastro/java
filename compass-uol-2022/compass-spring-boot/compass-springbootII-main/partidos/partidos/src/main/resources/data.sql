@@ -1,0 +1,35 @@
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PARTIDO LIBERAL', 'PL', 'DIREITA', '2006-10-26');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PARTIDO TRABALHISTA BRASILEIRO', 'PTB', 'DIREITA', '1945-05-15');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PARTIDO DEMOCRATICO TRABALHISTA', 'PDT', 'ESQUERDA', '1979-06-17');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PARTIDO DOS TRABALHADORES', 'PT', 'ESQUERDA', '1980-02-10');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PARTIDO COMUNISTA DO BRASIL', 'PCDOB', 'ESQUERDA', '1988-06-25');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PARTIDO SOCIALISTA BRASILEIRO', 'PSB', 'ESQUERDA', '1988-06-25');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PARTIDO DA SOCIAL DEMOCRACIA BRASILEIRA', 'PSDB', 'CENTRO', '1988-08-06');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PARTIDO TRABALHISTA CRISTÃO', 'PTC', 'DIREITA', '1985-07-11');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PARTIDO SOCIAL CRISTÃO', 'PSC', 'DIREITA', '1985-05-15');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PARTIDO DA MOBILIZAÇÃO NACIONAL', 'PMN', 'DIREITA', '1984-04-21');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('CIDADANIA', 'CIDADANIA', 'CENTRO', '1992-03-19');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PARTIDO VERDE', 'PV', 'ESQUERDA', '1986-01-17');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('AVANTE', 'AVANTE', 'CENTRO', '1989-05-15');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PROGRESSISTAS', 'PP', 'DIREITA', '1995-04-14');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PARTIDO SOCIALISTA DOS TRABALHADORES UNIFICADO', 'PSTU', 'DIREITA', '1994-06-05');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PARTIDO RENOVADOR TRABALHISTA BRASILEIRO', 'PRTB', 'DIREITA', '1988-06-25');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('DEMOCRACIA CRISTÃ', 'DC', 'DIREITA', '1995-03-30');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PARTIDO DA CAUSA OPERÁRIA', 'PCO', 'DIREITA', '1995-12-07');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PODEMOS', 'PODE', 'DIREITA', '1995-05-25');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('REPUBLICANOS', 'REPUBLICANOS', 'DIREITA', '2005-08-25');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PARTIDO SOCIALISMO E LIBERDADE', 'PSOL', 'DIREITA', '2004-06-06');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PARTIDO LIBERAL', 'PL', 'DIREITA', '2006-10-26');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PARTIDO SOCIAL DEMOCRÁTICO', 'PSD', 'DIREITA', '2011-03-21');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PATRIOTA', 'PATRIOTA', 'CENTRO', '2011-08-09');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PARTIDO REPUBLICANO DA ORDEM SOCIAL', 'PROS', 'DIREITA', '2010-01-04');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('SOLIDARIEDADE', 'SOLIDARIEDADE', 'DIREITA', '2012-10-25');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PARTIDO NOVO', 'NOVO', 'ESQUERDA', '2011-02-12');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('REDE SUSTENTABILIDADE', 'REDE', 'ESQUERDA', '2013-02-16');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('PARTIDO DA MULHER BRASILEIRA', 'PMB', 'ESQUERDA', '2008-01-01');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('UNIDADE POPULAR', 'UP', 'ESQUERDA', '2016-06-16');
+INSERT INTO PARTIDO(nome_partido, sigla, ideologia, data_fundacao) VALUES('UNIAO BRASIL', 'UNIAO', 'DIREITA', '2021-10-06');
+
+INSERT INTO ASSOCIADO(nome_associado, cargo_politico, data_nascimento, sexo) VALUES('JAIR BOLSONARO', 'PRESIDENTE','1955-03-21', 'MASCULINO');
+
+INSERT INTO USUARIO(email, senha) VALUES('compasser@compasso.com', '$2a$10$zTie0wiaNEpUjCpj8lL2P.cAbPQgXm1zF87/hTLB9iPkI8F5CakwK');

@@ -1,0 +1,167 @@
+openapi: 3.0.1
+info:
+  title: Employee Management API
+  description: This API allows you to manage employees in a system. It includes functionalities for creating, retrieving, updating, and deleting employee records.
+  version: 1.0.0
+  # contact:
+  #   name: Amanda Engel de Castro
+  #   employeeEmail: amandaengeldecastro@gmail.com
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+paths:
+  /employee:
+    post:
+      summary: Create one or more employees
+      description: Creates one or more employee records.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/EmployeeRequest'
+      responses:
+        '201':
+          description: Employees created successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee'
+        '400':
+          description: Bad Request
+
+    get:
+      summary: Retrieve all employees
+      description: Returns a list of all employees in the system.
+      responses:
+        '200':
+          description: List of employees
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee'
+
+  /employee/{id}:
+    get:
+      summary: Retrieve employee by ID
+      description: Returns an employee based on the provided ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Employee details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+        '404':
+          description: Employee not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    put:
+      summary: Update an employee
+      description: Updates the details of an existing employee.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeRequest'
+      responses:
+        '200':
+          description: Employee updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+        '404':
+          description: Employee not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      summary: Delete an employee
+      description: Deletes an employee by ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Employee 9 deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '404':
+          description: Employee 9 not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    DeleteResponse:
+      type: object
+      properties:
+        message: 
+          type: string
+          example: Employee 9 deleted successfully
+    Employee:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        employeeName:
+          type: string
+          example: John
+        employeeSalary:
+          type: string
+          example: 1.321
+        employeeEmail:
+          type: string
+          example: john.doe@employeeEmail.com
+    EmployeeRequest:
+      type: object
+      properties:
+        employeeName:
+          type: string
+          example: John
+        employeeSalary:
+          type: string
+          example: 1.321
+        employeeEmail:
+          type: string
+          example: john.doe@employeeEmail.com
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Employee 4 not found.
