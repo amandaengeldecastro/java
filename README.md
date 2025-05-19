@@ -16,4 +16,4 @@ This repository is intended to store a merge of all of mine study projects produ
 |---------|-------------------|--------------|
 | ✅      | `pascal-triangle` | 2021-11-19   | 
 | 🔄 | `java-21-spring-mvc-crud-mysql` | 2025-04-01 | 
-| 📌 | `al-carbon-calc-mongodb-gradle`<br>`compass-uol-2022`<br>`digiage`<br>`dio-gft`<br>`imersao-alura-spring-mongodb-docker`<br>`java-17-spring-boot-crud-mysql`<br>`digiage`| | 
+| 📌 | `al-carbon-calc-mongodb-gradle`<br>`compass-uol-2022`<br>`digiage`<br>`dio-gft`<br>`imersao-alura-spring-mongodb-docker`<br>`java-17-spring-boot-crud-mysql`<br>`android-studio`| | 
