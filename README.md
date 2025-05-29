@@ -6,7 +6,7 @@ This repository is intended to store a merge of all of mine study projects produ
 
 ✅ **Reviewed:** Proposed functionality operating correctly
 
-🔄 **Under Review | In progress:** Projects that are being reviewed and analyzed for possible improvements and/or the implementation of new features  
+🔄 **Under Review:** Projects that are being reviewed and analyzed for possible improvements and/or the implementation of new features  
 
 📌 **Backlog To Review:** Pending review, which may compromise the functionality proposed by the project.
 
@@ -15,6 +15,6 @@ This repository is intended to store a merge of all of mine study projects produ
 | Status  | Project           | Initial Data | 
 |---------|-------------------|--------------|
 | ✅      | `pascal-triangle` | 2021-11-19   | 
-| 🔄 | `dio-tonnie` | 2025-05-28 | 
+| 🖥️ | `dio-tonnie` | 2025-05-28 | 
 | 🔄 | `spring-mvc-crud-mysql` | 2025-04-01 | 
 | 📌 | `al-carbon-calc-mongodb-gradle`<br>`compass-uol-2022`<br>`digiage`<br>`dio-gft`<br>`imersao-alura-spring-mongodb-docker`<br>`java-17-spring-boot-crud-mysql`<br>`android-studio`| | 
