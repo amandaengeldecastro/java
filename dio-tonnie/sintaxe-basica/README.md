@@ -222,7 +222,7 @@ Siga as seguintes regras para implementar
 
 --------
 
-**[TODO]** 2. Escreva um código onde controlamos as funções de um carro, ele deve ter as seguintes funções:
+2. Escreva um código onde controlamos as funções de um carro, ele deve ter as seguintes funções:
    - Ligar o carro;
    - Desligar o carro;
    - Acelerar;
@@ -250,7 +250,7 @@ Siga as seguintes regras na implementação
 
 -------------
 
-**[TODO]** 3. Escreva um código onde temos o controle de banho de um petshop, a maquina de banhos dos pets deve ter as seguintes operações:
+3. Escreva um código onde temos o controle de banho de um petshop, a maquina de banhos dos pets deve ter as seguintes operações:
    - Dar banho no pet;
    - Abastecer com água;
    - Abastecer com shampoo;
