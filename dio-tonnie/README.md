@@ -10,6 +10,8 @@ Repository intended for carrying out exercises proposed by the DIO bootcamp.
 | 4     | `desafio` |
 | 5     | `poo/abstração-encapsulamento` |
 | 6     | `poo/herança-polimorfismo` |
+| 7     | `poo/interfaces-lambda` |
+
 
 ## [Fundamentos] Exercícios propostos:
 
@@ -419,3 +421,45 @@ Cada classe deve ter seus respectivos getters e setters ( para atributos que fa�
 - A classe Vendedor deve ter os métodos Realizar venda ( incrementar o número de vendas quando acionado), Consultar vendas, Realizar login, Realizar logoff, alterar dados, alterar senha;
 - A classe Atendente deve ter os métodos Receber pagamentos (onde o método recebe um valor que deve ser incrementado no valor em caixa), Fechar o caixa, Realizar Login, Realizar logoff, alterar dados e alterar senha;
 3. Escreve uma hierarquia de classes para criação de relógios para diferentes lugares do mundo, defina uma classe pai que tenha as propriedades Hora, minuto e segundo com seus respectivos getters e setters (atendendo as regras do funcionamento de um relógio) e um método que deverá retornar a hora no formato HH:MM:SS, a partir dessa classe crie 2 implementações, uma chamada relógio Americando e outra chamada relógio Brasileiro, lembrando que para o relógio americano não existem as horas de 13 até 24. Defina também na super classe um método que ficará por responsabilidade da classe que extende-la definir seu funcionamemnto, esse método deve receber um relógio ( independente da implementação) e deve-se extrair as informações dele e usa-la no objeto que recebeu para setar as novas informações do relógio.
+
+## [POO/Interfaces e Lambda] Quiz: 
+1. Qual a diferença de uma interface e uma interface funcional?
+Para a interface ser considerada interface funcional ela deve ter somente um método que exige implementação, porém ela pode ter quantos métodos defaults quiser
+
+2. Qual das características não são de uma interface? (Métodos concretos devem ser defaults, métodos não defaults devem se abstratos, não pode definir construtores, podem ser implementada por records)
+Nenhuma das alternativas
+
+3. Qual a função da anotação @FuncionalInterface?
+Marcar uma interface como interface funcional, porém não é requisito obrigatório para interface ser considerada funcional, porém irá gerar erros se colocada em uma interface que não atende os requisitos de uma
+
+4. Qual a diferença na relação de interfaces e classes abstratas com classes concretas e records?
+Records só podem implementar interfaces, enquanto classes podem implementar 1 classe por vez e quantas interfaces quiser
+
+5. Qual das opções é uma característica de uma interface funcional em Java?
+É uma interface que contém exatamente um método abstrato.
+
+6. Qual palavra-chave em Java é usada para indicar que uma classe implementa uma interface?
+implements
+
+7. Qual o modificador de acesso usado para restringir um método ou atributo a ser acessado apenas dentro da mesma classe?
+private
+
+
+## [TODO] [POO/Interfaces e Lambda] Exercícios: 
+1 - Escreva um código para enviar mensagens de marketing, para isso você deve ter a possibilidade de enviar a mesma mensagem para serviços diferentes, esses serviços devem ter um método para receber a mensagem como parâmetro, os serviços que devem estar disponíveis são:
+
+SMS;
+E-mail;
+Redes Sociais;
+WhatsApp;
+2 - Escreva um código que calcule o valor de tributos de produtos, os produtos disponíveis devem ser dos seguintes tipos: Alimentação, Saude e bem estar, Vestuário e Cultura. Todos os produtos devem ter um método para retornar o seu valor de imposto, de acordo com seu tipo:
+
+Alimentação 1%;
+Saude e bem estar 1.5%;
+Vestuário 2.5%;
+Cultura 4%.
+3 - Escreva um código onde seja possível calcular a área de uma figura geométrica, todas devem ter um método que retorne esse valor, as formas geométricas disponiveis devem ser as seguintes:
+
+Quadrado: possui o valor dos seus lados;
+Retângulo: possui os valores de base e altura;
+Circulor: possui o atributo raio.
