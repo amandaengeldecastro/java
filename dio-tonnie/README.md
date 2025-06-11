@@ -617,3 +617,37 @@ Se receber qualquer entrada que tenha números e outros caracteres verificar se 
 
 NOME_CAMPO;VALOR;TIPO;
 Os tipos que devem ser aceitos são: texto, datas, data e hora, números inteiros, números com pontos flutuantes, boleanos, array dos tipos anteriores ( opcional, possibilitar definir arrays de objetos e objetos internos).
+
+## [Exceções/IO/Dependencias] Resume: 
+
+| Categoria                | Classe Base                 | Obrigatório Tratar? | Exemplos Comuns                                              | Observações                                                                 |
+|--------------------------|-----------------------------|----------------------|---------------------------------------------------------------|------------------------------------------------------------------------------|
+| Checked Exception      | `java.lang.Exception`       | Sim                  | `IOException`, `SQLException`, `ParseException`               | Devem ser tratadas com `try/catch` ou declaradas com `throws`.             |
+| Unchecked Exception    | `java.lang.RuntimeException`| Não                  | `NullPointerException`, `IllegalArgumentException`, `ArithmeticException` | Ocorrem por erros de lógica/programação; não exigem tratamento obrigatório. |
+| Error                  | `java.lang.Error`           | Não                  | `OutOfMemoryError`, `StackOverflowError`                      | Indicam falhas graves na JVM; normalmente não devem ser capturados.         |
+
+
+## [Exceções/IO/Dependencias] Quiz: 
+1. Qual das seguintes classes é a superclasse de exceções (checked e unchecked: exceções verificadas no tempo de )
+java.lang.Exception
+
+2. Qual a diferença de Exceções checked e unchecked?
+Exceções checked são erros detectados em tempo de compilação e sempre devem ser tratadas. Exceções unchecked são erros detectados em tempo de execução e podem ou não serem tratadas.
+
+3. Qual das seguintes classes é a superclasse de exceções (checked e unchecked) e erros (OutOfMemoryError)
+java.lang.Throwable
+
+4. Qual das seguintes classes é a superclasse das exceções unchecked
+java.lang.RuntimeException
+
+5. Qual a diferença de uso das keywords throws e throw?
+Usamos throws para indicar que um método pode lançar 1 ou N exceções. Usamos throw para lançar uma exceção em nosso código
+
+6. Qual a principal diferença entre checked exceptions e unchecked exceptions em Java?
+Checked exceptions precisam ser declaradas com throws ou tratadas em um bloco try-catch, enquanto unchecked exceptions não exigem declaração ou tratamento explícito.
+
+7. Qual das seguintes opções não representam uma implementação correta do bloco try catch?
+Try{ }catch (Exception ex){ }catch(RuntimeException ex){ }
+
+8. Qual a função dos blocos try, catch e finally
+try: usado para tentar executar um trecho de código que pode ter o fluxo interrompido por uma exceção Catch: trecho usado para rodar um código caso ocorra uma exceção do tipo X Finally: Será executado após o bloco catch ( caso aconteça um erro) ou após a conclusão do try (fluxo sem erros)
