@@ -445,7 +445,7 @@ implements
 private
 
 
-## [TODO] [POO/Interfaces e Lambda] Exercícios: 
+## [POO/Interfaces e Lambda] Exercícios: 
 1 - Escreva um código para enviar mensagens de marketing, para isso você deve ter a possibilidade de enviar a mesma mensagem para serviços diferentes, esses serviços devem ter um método para receber a mensagem como parâmetro, os serviços que devem estar disponíveis são:
 
 SMS;
@@ -463,3 +463,146 @@ Cultura 4%.
 Quadrado: possui o valor dos seus lados;
 Retângulo: possui os valores de base e altura;
 Circulor: possui o atributo raio.
+
+## [POO/Collections] Quiz: 
+1. Qual método é essencial para que um objeto funcione corretamente em coleções baseadas em `HashSet`?
+hashCode
+
+2. Qual é a principal diferença entre `ArrayList` e `LinkedList` no Java?
+`ArrayList` é ideal para cenários com muitas buscas e poucas alterações estruturais.
+
+3. Qual das alternativas descreve corretamente o funcionamento do método `add` em um `ArrayList`?
+Insere um elemento na posição final da lista e redimensiona o array interno apenas quando necessário.
+
+4. Qual implementação de `Set` mantém os elementos na ordem de inserção?
+LinkedHashSet
+
+**Map, Wrappers**
+5. Qual implementação de Map mantém as chaves em ordem natural ou definida por um comparador?
+TreeMap
+
+6. Qual é a função do método put em um Map?
+Adiciona um par chave-valor ao `Map`, sobrescrevendo o valor anterior caso a chave já exista.
+
+7. Qual das opções abaixo não é um tipo primitivo em Java?
+Integer
+
+8. O que é autoboxing em Java?
+É o processo de converter um tipo primitivo em seu tipo Wrapper.
+
+**String, StringBuilder, StringBuffer**
+9. Dado o código abaixo, qual será o valor da string str após sua execução? String str = "Java"; str = str.replace("a", "o");
+"Jovo".
+
+10. Qual é a principal diferença entre as classes String, StringBuilder e StringBuffer no Java?
+`String` é imutável, enquanto `StringBuilder` e `StringBuffer` são mutáveis.
+
+11. Considere o método split da classe String. Qual é a funcionalidade principal deste método?
+Dividir uma string em um array de substrings com base em um delimitador especificado.
+
+12. Por que o uso de StringBuilder é mais eficiente do que String em loops que realizam múltiplas concatenações?
+Porque `StringBuilder` reutiliza o mesmo objeto na memória para todas as operações.
+
+**BigDecimal, Enums, Optional**
+13. Considere o seguinte código usando Optional: Optional<String> optional = Optional.of("Java"); String result = optional.orElse("Default");
+"Java"
+
+14. Qual das seguintes características é verdadeira sobre a enumeração (enum) no Java?
+Um `enum` pode conter métodos e atributos.
+
+15. Qual é a principal finalidade da classe BigDecimal no Java?
+Realizar cálculos com alta precisão, especialmente em contextos financeiros.
+
+16. Sobre o tipo Optional no Java, qual das alternativas é verdadeira?
+A principal funcionalidade do `Optional` é evitar o uso de valores nulos.
+
+**API Streams e Generics**
+17. Sobre a API de Streams do Java, qual das afirmações abaixo é correta?
+As operações intermediárias de Streams, como `filter` e `map`, retornam uma nova Stream para processamento posterior.
+
+18. Em relação ao método flatMap da API de Streams, qual é a principal funcionalidade dele?
+Combinar múltiplas Streams em uma única Stream de objetos.
+
+19. Sobre a implementação de classes genéricas em Java, qual das opções é verdadeira?
+O uso de `extends` em parâmetros genéricos permite limitar o tipo que uma classe ou método pode aceitar.
+
+20. Considerando a utilização de Generics no Java, qual vantagem principal eles proporcionam?
+Permitem maior reutilização de código e segurança de tipo em tempo de compilação.
+
+**Date e Calendar**
+21. Qual é a principal diferença entre a classe Date e Calendar no Java?
+A classe Calendar oferece mais flexibilidade, como acesso granular a componentes de data, enquanto Date é mais limitada.
+
+22. Sobre a manipulação de Datas utilizando Date e Calendar, qual das alternativas abaixo é verdadeira?
+O método `get` do `Calendar` retorna valores constantes, como o número do mês ou dia da semana, e algumas dessas constantes começam em 0, como o mês.
+
+23. Sobre a classe Date do Java, qual das afirmações abaixo é correta?
+A classe Date é depreciada, mas ainda pode ser utilizada para compatibilidade com bibliotecas mais antigas.
+
+24. Sobre a classe Calendar introduzida no Java 7, qual das opções abaixo é verdadeira?
+O método `getInstance` de `Calendar` é utilizado para criar instâncias com a data atual.
+
+**Classes OffsetDateTime OffsetTime LocalDate LocalDateTime e LocalTime**
+25. Qual é uma característica importante das classes LocalDate, LocalTime e LocalDateTime do Java?
+Oferecem métodos para manipulação de datas e horas sem levar em consideração time zones.
+
+26. O que diferencia a classe OffsetDateTime da classe LocalDateTime no Java?
+OffsetDateTime` inclui informações sobre time zones, enquanto `LocalDateTime` não possui essa funcionalidade.
+
+27. Qual é a principal utilidade do método isEqual na classe OffsetDateTime?
+Comparar dois instantes levando em consideração os time zones de cada data.
+
+28. Qual das seguintes operações NÃO é suportada diretamente pela classe LocalDate?
+Manipulação direta de time zones na instância de `LocalDate`.
+
+**Thread e Runnable**
+29. Qual é a principal diferença entre a classe Thread e a interface Runnable no Java?
+A interface `Runnable` é usada para criar tarefas, enquanto a classe `Thread` é usada para executar essas tarefas.
+
+30. Em que situação a classe AtomicInteger é mais adequada do que o uso de um int comum?
+Quando operações atômicas são necessárias em um ambiente multi-thread para evitar problemas de concorrência.
+
+31. Qual é o objetivo principal do uso do bloco synchronized no código Java?
+Evitar problemas de concorrência garantindo acesso exclusivo a um recurso compartilhado.
+
+32. Qual classe Java é recomendada para manipulação de strings em cenários multi-thread, garantindo segurança contra concorrência?
+StringBuffer.
+
+> A classe StringBuffer é a recomendada quando você precisa manipular strings de forma segura em ambientes multi-thread, pois seus métodos são sincronizados. Já o StringBuilder é mais rápido, porém não é thread-safe, sendo ideal para uso em thread única.
+
+33. Considere as seguintes classes: public record User(String name, List<Contact> contacts){} public record Contact(String description){} Se precisarmos extrair de uma lista de users uma lista com seus respectivos Contacts usando a api de Stream qual dos códigos a seguir devemos usar?
+
+users.Stream().flatMap(u → u.contacts().stream()).toList();
+
+34. Caso a gente queira criar uma variavel para trabalhar com coleções do tipo primitivo int qual das seguintes opções devemos usar?
+Var arr = new int[5];
+
+35. "considere o código a seguir: Integer i = 5; I++; System.out.println(i); O que é correto afirmar?"
+Não é recomendado nesse caso usar a classe Integer, seria melhor usar o tipo primitivo int para evitar problemas de autoboxing
+
+36. Qual das seguintes classes devemos usar para se trabalhar com números e a precisão dos calcular é muito importante
+BigDecimal
+
+37. O que é correto afirmar sobre um cenário onde não implementamos o equals, hashCode e ToString de um record:
+Nos records do Java, os métodos equals, hashCode e toString são gerados automaticamente pelo compilador com base nos componentes do record. Não somos obrigados a implementar esses métodos manualmente. Eles não causam NullPointerException por padrão. Não usam a implementação padrão da classe Object (que compara por referência).
+A comparação de igualdade e o uso em estruturas de hash funcionam corretamente graças à implementação gerada.
+
+## [POO/Collections] Exercicios: 
+
+1 - Escreva um código que cria uma calculadora para as operações de soma e subtração, o usuário deve informar todos os números que serão usados na conta de uma só vez utilizando virgulas para separa-los.
+
+2 - Escreva um código que receba entradas sem formatação e as retorne formatadas, os tipos de entradas que o código deve retornar são as seguintes:
+
+Telefone fixo (8 dígitos sem DDD xxxx-xxxx, 10 Dígitos com DDD (xx)xxxx-xxxx);
+Celular (9 dígitos sem DDD xxxxx-xxxx, 11 dígitos (xx)xxxxx-xxxx);
+O código deve ser capaz de detectar as seguintes situações:
+
+Se receber somente números detectar se corresponde com algum dos formatos aceitos e retornar formatado;
+Se receber uma entrada com quantidade de números diferentes dos padrões descritos acima, informar que não se trata de um número válido;
+Se receber um número formatado, retorna-lo do mesmo jeito e informar de qual tipo de dispositivo se trata;
+Se receber com mascara incorreta, corrigir e retornar
+Se receber qualquer entrada que tenha números e outros caracteres verificar se tem números para compor um dos tipos aceitos e retornar do que se trata ou retornar que foi uma entrada inválida.
+3 - Escreva um código que receba 3 valores separados por um caracter de sua escolha n vezes ( n é o número de vezes que o usuário desejar informar) ex.: nome;Lucas;Texto. Quando o usuário parar de informar valores o código deve retornar todos esses campos compondo um json, um xml e um yaml (Json: https://pt.wikipedia.org/wiki/JSON, XML: https://pt.wikipedia.org/wiki/XML, yaml: https://www.treinaweb.com.br/blog/o-que-e-yaml) as entradas devem seguir o seguinte padrão:
+
+NOME_CAMPO;VALOR;TIPO;
+Os tipos que devem ser aceitos são: texto, datas, data e hora, números inteiros, números com pontos flutuantes, boleanos, array dos tipos anteriores ( opcional, possibilitar definir arrays de objetos e objetos internos).
