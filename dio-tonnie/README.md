@@ -587,6 +587,17 @@ BigDecimal
 Nos records do Java, os métodos equals, hashCode e toString são gerados automaticamente pelo compilador com base nos componentes do record. Não somos obrigados a implementar esses métodos manualmente. Eles não causam NullPointerException por padrão. Não usam a implementação padrão da classe Object (que compara por referência).
 A comparação de igualdade e o uso em estruturas de hash funcionam corretamente graças à implementação gerada.
 
+| **Tipo de Collection** | **Exemplos (implementações)**     | **Principais métodos**                                 | **Quando usar**                                                                                           |
+|------------------------|------------------------------------|--------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| **List**               | `ArrayList`, `LinkedList`          | `add`, `get`, `remove`, `size`, `contains`             | Coleção ordenada, permite duplicatas. `ArrayList` → buscas rápidas. `LinkedList` → muitas inserções/remoções. |
+| **Set**                | `HashSet`, `LinkedHashSet`, `TreeSet` | `add`, `remove`, `contains`, `size`                   | Não permite duplicatas. `HashSet` → rápido sem ordem. `LinkedHashSet` → mantém ordem de inserção. `TreeSet` → ordenado. |
+| **Map**                | `HashMap`, `LinkedHashMap`, `TreeMap` | `put`, `get`, `remove`, `containsKey`, `keySet`, `values` | Armazena pares chave-valor. `HashMap` → rápido, sem ordem. `LinkedHashMap` → ordenado por inserção. `TreeMap` → ordenado por chave. |
+| **Queue**              | `LinkedList`, `PriorityQueue`      | `offer`, `poll`, `peek`, `size`                        | Fila FIFO. `PriorityQueue` → ordenação por prioridade.                                                    |
+| **Deque**              | `ArrayDeque`, `LinkedList`         | `addFirst`, `addLast`, `pollFirst`, `pollLast`, `peekFirst`, `peekLast` | Acesso a dois extremos (pilha ou fila dupla).                                                              |
+| **Vector**             | `Vector`                           | `add`, `get`, `remove`, `size`                         | Similar a `ArrayList`, porém sincronizado (thread-safe). Pouco usado hoje.                                |
+| **Stack**              | `Stack`                            | `push`, `pop`, `peek`                                  | Pilha LIFO. Prefira `ArrayDeque` para melhor desempenho.                                                  |
+
+
 ## [POO/Collections] Exercicios: 
 
 1 - Escreva um código que cria uma calculadora para as operações de soma e subtração, o usuário deve informar todos os números que serão usados na conta de uma só vez utilizando virgulas para separa-los.
