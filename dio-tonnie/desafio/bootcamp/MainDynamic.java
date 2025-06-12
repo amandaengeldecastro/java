@@ -73,11 +73,16 @@ public class MainDynamic {
             curso.setDescricao(scanner.nextLine());
 
             System.out.print("Carga horária (em horas): ");
-            curso.setCargaHoraria(Integer.parseInt(scanner.nextLine()));
+            try {
+                curso.setCargaHoraria(Integer.parseInt(scanner.nextLine()));
+                bootcamp.getConteudos().add(curso);
 
-            bootcamp.getConteudos().add(curso);
+                System.out.println("Curso '" + curso.getTitulo() + "' criado com sucesso!");
+            } catch (NumberFormatException e) {
+                System.out.println("Erro ao criar curso -> Carga horária inválida. Por favor, digite um número inteiro.");
+                // throw new IllegalArgumentException("Carga horária inválida. Por favor, digite um número inteiro.");
+            }
 
-            System.out.println("Curso '" + curso.getTitulo() + "' criado com sucesso!");
         }
     }
 
