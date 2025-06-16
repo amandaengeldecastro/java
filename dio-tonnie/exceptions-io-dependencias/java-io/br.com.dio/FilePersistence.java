@@ -5,13 +5,13 @@ import java.io.OutputStream;
 public interface FilePersistence {
     String write(final String data);
 
-    boolean removeContent(final String sentence);
+    boolean remove(final String sentence);
 
     String replace(final String oldContent, final String newContent);
 
     String findAll();
 
-    String fingBy(final String sentence);
+    String findBy(final String sentence);
 
     private void clearFile() {
         try (OutputStream outputStream = new FileOutputStream(currentDir + storedDir + fileName)) {

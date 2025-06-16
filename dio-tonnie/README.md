@@ -651,3 +651,18 @@ Try{ }catch (Exception ex){ }catch(RuntimeException ex){ }
 
 8. Qual a função dos blocos try, catch e finally
 try: usado para tentar executar um trecho de código que pode ter o fluxo interrompido por uma exceção Catch: trecho usado para rodar um código caso ocorra uma exceção do tipo X Finally: Será executado após o bloco catch ( caso aconteça um erro) ou após a conclusão do try (fluxo sem erros)
+
+## [Exceções/IO/Dependencias] JavaIO Quiz : 
+1. Qual das apis é mais recomendada para operações simples com arquivos e diretórios ( performance não é tão importante)
+java.io
+
+2. Qual é a principal funcionalidade do pacote java.io em Java?
+Fornecer classes para entrada e saída de dados, como leitura e gravação de arquivos.
+
+3. Qual classe do pacote java.io é usada para gravar texto em um arquivo?
+FileWriter
+
+4. Qual a função do Try with resource? try(OutputStream outputStream = new FileOutputStream(currentDir + storedDir + fileName)){ }
+Utilizar um objeto que deve fechar recursos após ser utilizado ( deve implementar a interface autocloseable)
+
+

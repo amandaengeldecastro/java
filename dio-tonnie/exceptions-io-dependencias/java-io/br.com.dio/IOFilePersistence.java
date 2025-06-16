@@ -1,10 +1,16 @@
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.stream.Stream;
+import javax.management.RuntimeErrorException;
 
 public class IOFilePersistence implements FilePersistence {
     private final String currentDir = System.getProperty("user.dir");
@@ -44,23 +50,81 @@ public class IOFilePersistence implements FilePersistence {
     }
 
     @Override
-    public boolean removeContent(final String sentence) {
-        return false;
+    public boolean remove(final String sentence) {
+        var content = findAll();
+        var contentList = new ArrayList<>(Stream.of(content.split(System.lineSeparator())).toList());
+
+        if (contentList.stream().noneMatch(c -> c.contains(sentence)))
+            return false;
+
+        clearFile();
+        contentList.stream()
+                .filter(c -> !c.contains(sentence))
+                .forEach(this::write);
+        return true;
     }
 
     @Override
     public String replace(final String oldContent, final String newContent) {
-        return null;
+        var content = findAll();
+        var contentList = new ArrayList<>(Stream.of(content.split(System.lineSeparator())).toList());
+
+        boolean replaced = false;
+
+        for (int i = 0; i < contentList.size(); i++) {
+            String line = contentList.get(i);
+            if (line.contains(oldContent)) {
+                contentList.set(i, line.replace(oldContent, newContent));
+                replaced = true;
+            }
+        }
+
+        if (!replaced)
+            return null; 
+
+        clearFile(); 
+        contentList.forEach(this::write); 
+
+        return newContent;
     }
 
     @Override
     public String findAll() {
-        return null;
+        var content = new StringBuilder(); /* Manipulação de strings mutáveis em Java -: thread-safe */
+        try (var reader = new BufferedReader(new FileReader(currentDir + storedDir + fileName))) {
+            String line;
+            do {
+                line = reader.readLine();
+                if (line != null)
+                    content.append(line)
+                            .append(System.lineSeparator());
+
+            } while (line != null);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return content.toString();
     }
 
     @Override
-    public String fingBy(final String sentence) {
-        return null;
+    public String findBy(final String sentence) {
+        String found = "";
+        try (var reader = new BufferedReader(new FileReader(currentDir + storedDir + fileName))) {
+            String line = reader.readLine();
+
+            while (line != null) {
+                if ((line.contains(sentence))) {
+                    found = line;
+                    break;
+                }
+                line = reader.readLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return found;
     }
 
 }
