@@ -676,3 +676,84 @@ java.nio2
 
 8. Qual api é mais recomendada para um cénario onde a aplicação precisa ser escalada, e a performance é importante ( usando a versão 6 do Java)
 java.nio
+
+## [Exceções/IO/Dependencias] Maven Quiz : 
+1. Qual é o arquivo de configuração principal do Maven?
+pom.xml
+
+2. O que acontece se você não definir a variável de ambiente MAVEN_HOME corretamente?
+O Maven não funcionará corretamente, podendo gerar erros
+
+3. Como configurar o Maven para usar um repositório local diferente?
+Modificando o arquivo settings.xml
+
+4. Como você pode instalar o Maven em seu sistema operacional?
+Instalando através de um gerenciador de pacotes como apt-get ou brew
+
+## [Exceções/IO/Dependencias] Gradle Quiz : 
+1. Como você pode verificar se o Gradle está instalado corretamente no seu sistema?
+Executando o comando gradle -v
+
+2. O que é necessário para usar o Gradle Wrapper em um projeto?
+Incluir o arquivo gradle-wrapper.jar no projeto
+
+3. Qual é o arquivo de configuração principal do Gradle?
+build.gradle
+
+4. O que é recomendado ao usar o Gradle em um projeto?
+Usar sempre o Gradle Wrapper para garantir a versão correta.
+
+5. Ao declarar uma dependência em um projeto maven ( usando lombok como exemplo) qual dos formatos a seguir devemos usar ?
+" <dependency> <groupId>org.projectlombok</groupId> <artifactId>lombok</artifactId> <version>1.18.32</version> <scope>provided</scope> </dependency> "
+
+6. Ao declarar uma dependência em um projeto gradle ( usando lombok como exemplo) qual dos formatos a seguir devemos usar ?
+ " compileOnly 'org.projectlombok:lombok:1.18.32' "
+
+7. Qual comando usamos para compilar um projeto maven ?
+mvn compile
+
+8. Em um projeto gradle qual arquivo usamos para declarar as dependências do projeto?
+build.gradle/build.gradle.kts
+
+> A migração de maven para gradle -> gradle init 
+
+> A migração de gradle para maven ->   https://docs.gradle.org/current/userguide/publishing_maven.html
+
+
+## Links Úteis para Ferramentas e Documentações
+
+- **Instalação do Maven**  
+  https://www.baeldung.com/install-maven-on-windows-linux-mac
+
+- **Documentação do Maven (Getting Started)**  
+  https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
+
+- **Lombok**  
+  https://projectlombok.org
+
+- **MapStruct**  
+  https://mapstruct.org
+
+- **Gradle (instalação)**  
+  https://gradle.org/install/
+
+- **Começando com Gradle (Guia oficial)**  
+  https://docs.gradle.org/current/userguide/part1_gradle_init.html
+
+- **Build Init Plugin do Gradle**  
+  https://docs.gradle.org/current/userguide/build_init_plugin.html
+
+- **Checkstyle**  
+  https://checkstyle.sourceforge.io
+
+- **Maven Repository**  
+  https://mvnrepository.com
+
+- **Gradle Plugin Portal**  
+  https://plugins.gradle.org
+
+- **Maven Publish Plugin (Gradle)**  
+  https://docs.gradle.org/current/userguide/publishing_maven.html
+
+- **Atualização da versão do Gradle**  
+  https://docs.gradle.org/current/userguide/upgrading_version_8.html
