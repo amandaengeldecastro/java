@@ -665,4 +665,14 @@ FileWriter
 4. Qual a função do Try with resource? try(OutputStream outputStream = new FileOutputStream(currentDir + storedDir + fileName)){ }
 Utilizar um objeto que deve fechar recursos após ser utilizado ( deve implementar a interface autocloseable)
 
+5. Qual das opções a seguir devemos passar para que o seguinte código tenha permissão para operações de leitura: var file = new RandomAccessFile(new File(currentDir + storedDir + fileName), ""TRECHO_PARA_COMPLETAR"");
+“r”
 
+6. Qual das apis disponibiliza métodos estáticos em suas classes para manipulação de arquivos e diretórios
+java.nio2
+
+7. Qual das opções a seguir devemos passar para que o seguinte código tenha permissão para operações de leitura e escrita: var file = new RandomAccessFile(new File(currentDir + storedDir + fileName), ""TRECHO_PARA_COMPLETAR"");
+“rw”
+
+8. Qual api é mais recomendada para um cénario onde a aplicação precisa ser escalada, e a performance é importante ( usando a versão 6 do Java)
+java.nio
