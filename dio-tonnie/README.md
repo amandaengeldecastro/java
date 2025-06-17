@@ -11,7 +11,8 @@ Repository intended for carrying out exercises proposed by the DIO bootcamp.
 | 5     | `poo/abstração-encapsulamento` |
 | 6     | `poo/herança-polimorfismo` |
 | 7     | `poo/interfaces-lambda` |
-
+| 8     | `poo/collections` |
+| 9     | `exceptions-io-dependencias` |
 
 ## [Fundamentos] Exercícios propostos:
 
@@ -464,7 +465,8 @@ Quadrado: possui o valor dos seus lados;
 Retângulo: possui os valores de base e altura;
 Circulor: possui o atributo raio.
 
-## [POO/Collections] Quiz: 
+## [POO/Collections] Quiz: [DIO](https://github.com/cami-la/collections-java-api-2023)
+
 1. Qual método é essencial para que um objeto funcione corretamente em coleções baseadas em `HashSet`?
 hashCode
 
@@ -476,6 +478,41 @@ Insere um elemento na posição final da lista e redimensiona o array interno ap
 
 4. Qual implementação de `Set` mantém os elementos na ordem de inserção?
 LinkedHashSet
+
+5. O que é uma coleção na linguagem Java?
+É um objeto que agrupa múltiplos elementos dentro de uma única unidade.
+
+6. Sobre ordenação de um Map, escolha a alternativa correta:
+Também é possível ordenar um Map pelo valor.
+
+7. Marque a opção correta com a ordem de performance das implementações da interface Set:
+HashSet > LinkedHashSet > TreeSet
+
+8. Dado o conjunto: Set<String> coresDaBandeiraDoBrasil = new TreeSet<>(Arrays.asList("verde", "amarelo", "azul", "branco")) O que aparecerá no console quando chamamos: System.out.println(coresDaBandeiraDoBrasil)?
+[amarelo, azul, branco, verde]
+
+9. Qual é uma das vantagens de usar generics nas interfaces Collection em Java?
+Garantia de segurança do tipo de dados, evitando erros de tipo.
+
+10. Qual é a diferença entre Comparable e Comparator em Java?
+Comparable fornece uma única sequência de ordenação, enquanto o Comparator fornece múltiplas sequências de ordenação.
+Comparable fornece o método compareTo() para ordenar elementos, enquanto o Comparator fornece o método compare() para ordenar elementos.
+Comparable está presente no pacote java.lang, enquanto o Comparator está presente no pacote java.util.
+Comparable afeta a classe original, enquanto o Comparator não afeta a classe original.
+
+11. Qual método utilizamos para adicionar ou atualizar um elemento em um Map, passando como argumento “key” e “value”?
+Map.put(key, value)
+
+12. Marque a opção com as principais características da interface List:
+Permite inserção de elementos duplicados e obrigatoriamente garante a ordem de inserção.
+
+13. Dado uma lista List<Character> consoantesMeuNome = Arrays.asList('c', 'm', 'l', 'c', 'v', 'l', 'c', 'n', 't'); Qual o resultado da chamada System.out.println(consoantesMeuNome);
+[c, m, l, c, v, l, c, n, t]
+
+14. Quais são as interfaces que estendem diretamente da interface Collection?
+List, Set e Queue
+
+15. 
 
 **Map, Wrappers**
 5. Qual implementação de Map mantém as chaves em ordem natural ou definida por um comparador?
@@ -599,6 +636,7 @@ A comparação de igualdade e o uso em estruturas de hash funcionam corretamente
 
 
 ## [POO/Collections] Exercicios: 
+
 
 1 - Escreva um código que cria uma calculadora para as operações de soma e subtração, o usuário deve informar todos os números que serão usados na conta de uma só vez utilizando virgulas para separa-los.
 

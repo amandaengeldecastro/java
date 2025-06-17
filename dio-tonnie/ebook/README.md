@@ -10,7 +10,7 @@ Aprenda a usar os princípios da POO como um verdadeiro mestre.
 
 > Para usar o MidJourney, basta acessar **General Image Gen**,  e digitar /imagine promt A young programmer or Jedi warrior holding a lightsaber stylized as code or Java symbols, standing in front of a cosmic background, with lines of code floating around as if they were the "Force".
 
-
+[EbookRepository](https://github.com/felipeAguiarCode/prompts-recipe-to-create-a-ebook)
 
 
 
