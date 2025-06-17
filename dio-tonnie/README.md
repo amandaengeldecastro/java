@@ -465,7 +465,8 @@ Quadrado: possui o valor dos seus lados;
 Retângulo: possui os valores de base e altura;
 Circulor: possui o atributo raio.
 
-## [POO/Collections] Quiz: [DIO](https://github.com/cami-la/collections-java-api-2023)
+## [POO/Collections] Quiz: 
+[⚠️ DIO - Desafios em progresso](https://github.com/cami-la/collections-java-api-2023)
 
 1. Qual método é essencial para que um objeto funcione corretamente em coleções baseadas em `HashSet`?
 hashCode
