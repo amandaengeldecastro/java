@@ -13,6 +13,8 @@ Repository intended for carrying out exercises proposed by the DIO bootcamp.
 | 7     | `poo/interfaces-lambda` |
 | 8     | `poo/collections` |
 | 9     | `exceptions-io-dependencias` |
+| 10    | `stream-api` |
+
 
 ## [Fundamentos] Exercícios propostos:
 
@@ -466,7 +468,7 @@ Retângulo: possui os valores de base e altura;
 Circulor: possui o atributo raio.
 
 ## [POO/Collections] Quiz: 
-[⚠️ DIO - Desafios em progresso](https://github.com/cami-la/collections-java-api-2023)
+[⚠️ DOING](https://github.com/cami-la/collections-java-api-2023)
 
 1. Qual método é essencial para que um objeto funcione corretamente em coleções baseadas em `HashSet`?
 hashCode
@@ -796,3 +798,51 @@ build.gradle/build.gradle.kts
 
 - **Atualização da versão do Gradle**  
   https://docs.gradle.org/current/userguide/upgrading_version_8.html
+
+## [Stream-API]: 
+[Stream-API](https://github.com/digitalinnovationone/ganhando_produtividade_com_Stream_API_Java)
+
+[Functional-Interface](https://github.com/digitalinnovationone/ganhando_produtividade_com_Stream_API_Java/tree/master/src/functional_interface)
+
+
+[DesafiosStreamAPI](https://github.com/digitalinnovationone/ganhando_produtividade_com_Stream_API_Java/blob/master/src/stream_api/README.md)
+
+
+| Interface           | Entrada  | Saída     | Uso Principal                          |
+|---------------------|----------|-----------|----------------------------------------|
+| `Consumer<T>`       | `T`      | `void`    | Executar ação sem retorno              |
+| `Supplier<T>`       | `none`   | `T`       | Fornecer/criar valor                   |
+| `Function<T, R>`    | `T`      | `R`       | Transformar ou mapear valor            |
+| `Predicate<T>`      | `T`      | `boolean` | Testar condição (filtrar, validar)     |
+| `BinaryOperator<T>` | `T, T`   | `T`       | Operar dois valores do mesmo tipo      |
+
+## [Stream-API] Quiz: 
+1. Qual é a principal vantagem do uso de expressões lambda em relação às classes anônimas em Java?
+Reduzir a complexidade do código, tornando-o mais legível.
+
+2. Qual das seguintes opções representa corretamente a sintaxe de uma Method Reference para um método estático chamado calcular na classe Calculadora?
+Calculadora::calcular
+
+3. Qual das seguintes opções representa corretamente a sintaxe de uma expressão lambda com um único parâmetro na forma de um predicado?
+(x) -> x > 0
+
+4. Qual das seguintes operações da Stream API é usada para combinar os elementos da Stream em um único valor com base em uma função de acumulação?
+reduce(BinaryOperator<T> accumulator)
+
+5. O que é uma operação intermediária na Stream API?
+Uma operação que retorna um novo Stream e pode ser encadeada com outras operações.
+
+6. O que o tipo Optional representa em Java?
+Uma forma de encapsular um valor que pode estar presente ou ausente, evitando referências nulas.
+
+7. Qual das seguintes opções representa uma operação terminal da Stream API em Java?
+collect()
+
+8. O que é uma Functional Interface em Java?
+Uma interface que possui apenas um método abstrato e pode ser usada como um tipo para uma expressão lambda.
+
+9. Qual das seguintes operações da Stream API é usada para classificar os elementos da Stream em ordem natural ou usando um comparador específico?
+sorted()
+
+10. O que é programação funcional em Java?
+Um paradigma de programação que trata a computação como avaliação de expressões matemáticas e evita o estado mutável.
