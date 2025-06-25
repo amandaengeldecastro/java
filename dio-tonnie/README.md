@@ -14,6 +14,13 @@ Repository intended for carrying out exercises proposed by the DIO bootcamp.
 | 8     | `poo/collections` |
 | 9     | `exceptions-io-dependencias` |
 | 10    | `stream-api` |
+| 11    | `database-relacionais` |
+| 12    | `database-nao-relacionais`|
+| 13    | `database-jdbc`|
+| 14    | `boas-praticas`|
+| 15    | `padrões-de-projetos`|
+
+
 
 
 ## [Fundamentos] Exercícios propostos:
@@ -846,3 +853,557 @@ sorted()
 
 10. O que é programação funcional em Java?
 Um paradigma de programação que trata a computação como avaliação de expressões matemáticas e evita o estado mutável.
+
+## [DataBase] Quiz: 
+1. Existe um software conhecido por permitir acessar e gerenciar um banco de dados de maneira visual, semelhante a uma IDE. Esse software é conhecido como:
+DBMS
+
+2. Em um banco de dados relacional, existe um conceito muito importante, conhecido também por armazenar dados estruturados. O nome desse conceito é:
+Tabela
+
+3. Existem diversos tipos de banco de dados, sendo dois deles amplamente utilizados hoje. Estamos falando do:
+Banco de dados relacional e não relacional (temos também o orientado a objetos e hierárquico)
+
+4. Toda aplicação precisa de um lugar para salvar dados, e o principal local para salvar essas informações é o banco de dados. O banco de dados é amplamente utilizado em praticamente todos os sistemas, pois:
+Possui a capacidade de gravar e obter dados de maneira fácil, crescer dinâmicamente e atender a diversas requisições dos usuários
+
+## [DataBase] Banco de Dados - Relacionais:
+SGBD: Sistema de Gerenciamento de Banco de Dados;
+Linha | Tupla: é uma estrutura de dados que armazena uma sequência ordenada e imutável de elementos;
+ACID: é um conjunto de propriedades que garantem a confiabilidade e a integridade das transações. ACID é um acrônimo para Atomicidade, Consistência, Isolamento e Durabilidade. 
+
+**Comandos DDL (Data Definition Language)**
+Os comandos DDL são usados para definir e gerenciar a estrutura de um banco de dados. Eles permitem criar tabelas, modificar sua estrutura e excluí-las quando necessário. Alguns dos principais comandos DDL incluem:
+
+CREATE TABLE: Usado para criar uma nova tabela no banco de dados.
+ALTER TABLE: Permite modificar a estrutura de uma tabela existente.
+DROP TABLE: Remove uma tabela do banco de dados.
+
+**Comandos DQL (Data Query Language)**
+Os comandos DQL são usados para consultar dados em um banco de dados. Eles permitem recuperar informações específicas de uma ou várias tabelas. Alguns dos comandos DQL mais comuns incluem:
+
+SELECT: Usado para selecionar dados de uma tabela.
+FROM: Especifica a tabela da qual você deseja selecionar dados.
+WHERE: Define critérios para filtrar os resultados.
+GROUP BY: Agrupa os resultados com base em uma ou mais colunas.
+HAVING: Define condições para grupos criados pelo GROUP BY.
+ORDER BY: Classifica os resultados em ordem crescente ou decrescente.
+
+**Comandos DML (Data Manipulation Language)**
+Os comandos DML são usados para manipular dados em tabelas. Eles permitem adicionar, atualizar e excluir registros. Alguns dos comandos DML mais comuns incluem:
+
+INSERT INTO: Adiciona novos registros a uma tabela.
+UPDATE: Modifica registros existentes com novos valores.
+DELETE FROM: Remove registros de uma tabela.
+
+```
+DCL: Linguagem de controle de dados como GRANT e REVOKE;
+DTL: Linguagem de transacação de dados como BEGIN, COMMIT e ROLLBACK;
+```
+
+MER: Modelo Entidade Relacionamento
+[DER](https://app.creately.com|https://app.quickdatabasediagrams.com/#/): Diagrama Entidade Relacionamento
+Cardinalidade:
+1:1
+1:n ou 1:*: um para muitos
+n:n ou *..*: muitos para muitos
+0 quando não é obrigatório
+
+**Linguagem para modelar com app.quick**
+
+```
+Usuario
+-
+id PK int
+nome string
+dataNascimento Date
+endereco string
+
+Reservas
+-
+id PK int
+idUsuario int FK >- Usuario.id
+```
+
+**[Banco de Dados na Nuvem](https://github.com/pamelaborges/dio-bd-relacional)**
+[MariaDBCloudClusters](https://clients.cloudclusters.io/)
+Application -> 
+Criar DataBase -> Criar usuário e senha;
+Após realizar o deploy, para manipular os dados basta acessar phpMyAdmin e abrir o 'Launch'
+
+```sql
+CREATE TABLE usuarios(
+    id INT,
+    nome VARCHAR(255) NOT NULL COMMENT 'Nome do usuário',
+    email VARCHAR(100) NOT NULL UNIQUE COMMENT 'E-mail do usuário',
+    endereco VARCHAR(50) NOT NULL COMMENT 'Endereço',
+    data_nascimento DATE NOT NULL COMMENT 'Data de Nascimento');
+```
+```sql
+CREATE TABLE viagens.destino(
+    id INT,
+    nome VARCHAR(255) NOT NULL COMMENT 'Nome do destino',
+    descricao VARCHAR(255) NOT NULL UNIQUE COMMENT 'Descrição do destino');
+```
+```sql
+CREATE TABLE viagens.reservas(
+    id INT,
+    id_usuario INT,
+    id_destino INT,
+    data DATE,
+    status VARCHAR(255) NOT NULL);
+```
+```sql
+INSERT INTO usuarios(
+    id,
+    nome,
+    email,
+    endereco,
+    data_nascimento)
+    VALUES (1, "Amanda", "amandaengeldecastro@gmail.com", "Rua Bortolo Gusso", "1993-11-08");
+```
+
+Operadores:
+= igualdade
+<> ou != desigualdade
+> 
+<
+>=
+<=
+LIKE comparação
+IN pertence a uma lista 
+BETWEEN dentro de um intervalo
+AND e lógico
+OR ou lógico
+
+```sql
+SELECT * FROM usuarios WHERE id=1 AND nome LIKE "%Amanda%";
+```
+**Chave Estrangeira**
+```sql
+CREATE TABLE viagens.reservas (
+    id INT PRIMARY KEY,
+    id_usuario INT,
+    id_destino INT,
+    data DATE,
+    status VARCHAR(255) NOT NULL,
+    CONSTRAINT fk_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
+    CONSTRAINT fk_destino FOREIGN KEY (id_destino) REFERENCES viagens.destino(id)
+);
+
+-- Inserindo um destino (suponha id = 1)
+INSERT INTO viagens.destino (id, nome, descricao)
+VALUES (1, "Paris", "Cidade Luz, romântica e histórica");
+
+-- Inserindo uma reserva (com id_usuario = 1 e id_destino = 1)
+INSERT INTO viagens.reservas (id, id_usuario, id_destino, data, status)
+VALUES (1, 1, 1, "2025-07-10", "Confirmada");
+```
+
+**Chave Estrangeira: Restrição""
+ON DELETE: registro pai deve ser excluido
+ON UPDATE: define o comportamento dos registros quando o registro pai atualizado e podem ser -> CASCADE (altera todos), SET NULL (remove a referencial), SET DEFAULT e RESTRICT
+
+**Normalização dos dados** 
+Formas normais: 
+1FN - atomicidade de dados, por exemplo o endereço que deve ser segmentato em rua, numero, complemento e bairro;
+
+2FN - estabelece que deve estar na 1FN; os atributos não chave devem depender totalmente da chave primária; se a tabela tem uma chave primária simples, não existe a possibilidade de termos dependência parcial e portanto, já se encontra na 2FN;
+
+3FN - a tabela deve estar na 2FN; nenhuma coluna não-chave deve depender de outra coluna não-chave. Exemplo: cidade e estado
+
+**Consultas Avançadas - JOINS**
+
+INNER - retorna dados que tem correspondência em ambas as 
+> Intersecção de A e B do diagrama de Venn
+```sql
+SELECT * FROM tabela1 INNER JOIN tabela2 ON tabela1.coluna=tabela2.coluna
+```
+LEFT - retorna os dados da junção e as linhas correspondentes da tabela da esquerda e se não houver correspondência, retorna nulo.
+> Lado A inteiro de um diagrama de Venn
+```sql
+SELECT * FROM tabela1 LEFT JOIN tabela2 ON tabela1.coluna=tabela2.coluna
+```
+RIGHT
+> Lado B inteiro de um diagrama de Venn
+```sql
+SELECT * FROM tabela1 RIGHT JOIN tabela2 ON tabela1.coluna=tabela2.coluna
+```
+FULL
+```sql
+SELECT * FROM tabela1 FULL JOIN tabela2 ON tabela1.coluna=tabela2.coluna
+```
+**SubConsultas** HAVING e JOIN
+
+**Funções agregadas** - COUNT, SUM, AVG, MIN e MAX
+
+**Agrupamento de Resultados** - GROUP BY
+
+**Ordenação de Resultados** - ORDER BY
+
+**Indices** - EXPLAIN SELECT * FROM usuarios WHERE email='joao.simpla@example.com' -> CREATE INDEX idx_nome ON usuarios (nome);
+
+
+## [DataBase] Quiz:
+1. O que é normalização de dados em um banco de dados relacional?
+Processo de eliminar redundâncias e inconsistências nos dados
+
+2. Qual é o conceito principal dos bancos de dados relacionais?
+Armazenamento de dados em tabelas
+
+3. Qual tipo de join é utilizado para combinar registros de duas tabelas apenas quando houver correspondência entre as chaves?
+INNER JOIN
+
+4. Qual é o objetivo principal da utilização de chaves primárias em uma tabela?
+Identificar registros exclusivos em uma tabela
+
+5. Quais são algumas das formas normais utilizadas na normalização de dados?
+1NF, 2NF, e 3NF
+
+6. Quais são as consultas utilizadas para combinar dados de várias tabelas em um banco de dados relacional?
+INNER JOIN, LEFT JOIN e RIGHT JOIN
+
+7. O que são subconsultas em um banco de dados relacional?
+Consultas aninhadas dentro de outras consultas
+
+8. Qual tipo de join é utilizado para retornar todos os registros da tabela da esquerda e os registros correspondentes da tabela da direita, mesmo que não haja correspondência entre as chaves?
+LEFT JOIN
+
+9. Na modelagem de dados relacionais, a cardinalidade representa:
+O número de ocorrências entre as entidades em um relacionamento.
+
+10. Qual tipo de join é utilizado para retornar todos os registros das duas tabelas, mesmo que não haja correspondência entre as chaves?
+FULL JOIN
+
+## [DataBase] Banco de Dados - Não Relacionais:
+O escalonamento dos bancos de dados não relacionais são nativamente horizontais, enquanto nativamente os relacionais são verticais.
+
+Depende do cluster para ter melhor performance;
+
+BASE -> **Ba**sically Avaliable, **S**oft-State, **E**ventually Consistency
+
+Bancos: MongoDB, Redis, Cassandra e [Neo4j](https://sandbox.neo4j.com/)
+
+Tipos: document store (JSON e XML), Key-Value Store, Wide-Column Store, Graph Store (para detecções de fraudes, mecanismos de recomendação ... )
+
+**Neo4j**
+Blank Sandbox -> Open 
+
+Criar um nó:
+```sql
+CREATE (:Client{name : "Amanda", age : 31, hobbies : ['Instrumentos Musicais, Fotografia, Aproveitar em Família']})
+```
+Consulta:
+```sql
+MATCH (Amanda) RETURN Amanda
+MATCH (todos) RETURN todos
+
+```
+Criar um nó com relacionamentos:
+```sql
+CREATE (:Client {name: "Scheila", age: 36, hobbies: ['Instrumentos Musicais', 'Fotografia', 'Desenho']}) 
+-[:Bloqueado]-> (:Client {name: "Julia", hobbies: ['Desenho']})
+
+
+MATCH (scheila:Client {name: "Scheila"}), (julia:Client {name: "Julia"})
+CREATE (scheila)-[:Bloqueado]->(julia)
+```
+
+Kespace: agrupamento de familias de colunas -> database;
+Column family/table: agrupamento de colunas -> table;
+Row key: chave que representa uma linha de coluna -> primary key;
+Column: representa um valor contendo: Name, Value Timestamp;
+
+[Cassandra](https://cassandra.apache.org/doc/4.0/cassandra/cql/)
+
+[Redis](https://redis.io/docs/latest/develop/interact/search-and-query/advanced-concepts/query_syntax/)
+
+Inserir no Redis:
+```redis
+SET user1:name "Amanda"
+```
+```sql
+GET user '{"name": "Amanda", "age": 31}'
+```
+Busca:
+```sql
+GET user1:name
+```
+Propriedade EX para editar quantos segundos o registro vai expirar; 
+
+EXISTS retorna um int dizendo se o dado existe;
+
+LPUSH é o comando para inserir um dado em uma lista; 
+
+Para buscar uma lista com base no index:
+```sql
+LINDEX user1:hobbies
+```
+Para listar todos os valores, ou dentro de um intervalo de indices:
+```
+LRANGE user: 0 1
+```
+
+TTL: comando para buscar o tipo de dado
+
+PERSIST: remove o tempo de expiração de um dado
+
+[MongoDB](https://learn.mongodb.com/catalog?labels=%5B%22Free%2FPaid%22%5D&values=%5B%22Free%22%5D)
+Document -> tupla/registro
+Collection -> tabela
+Embedding/linking -> join (referencia de um document)
+
+[MongoDB Studio](https://robomongo.org/)
+[MongoDB Cloud](https://account.mongodb.com/account/login)
+
+**Schema Design**
+1. Embedding: permite subdocumentos, consulta informações em uma única query e atualiza o registro em uma unica operação, entretanto, tem o limite de 16 MB por documento;
+2. Referência: destinado para documentos pequenos, não duplica informações e não deve ser usado em cenários que eu busco com frequência os dados, e se abormos essa má prática, será preciso duas ou mais queries ou a utilização do $lookup para a busca; 
+
+Relacionamentos One-To-One, prefira os atributos chave-valor no documento:
+```
+{
+  "_id": ObjectId("aa8s7d8a9sudaid90as8d"),
+  "name": "Amanda",
+  "street": "",
+  "number": ""
+}
+```
+
+Relacionamentos One-To-Few: embedding
+```
+{
+  "_id": ObjectId("aa8s7d8a9sudaid90as8d"),
+  "name": "Amanda",
+  "addresses":[
+    {"street": "", "number": ""},
+    {"street": "", "number": ""}
+  ]
+}
+```
+
+Relacionamentos  One-To-Many e Many-To-Many: referência
+```
+{
+  "_id": ObjectId("aa8s7d8a9sudaid90as8d"),
+  "name": "Amanda",
+  "addresses":[
+      ObjectId("123"), ObjectId("1234")
+  ]
+}
+
+/*Adress*/
+{
+  "_id": ObjectId("123"),
+  "name": "XX",
+  "street": "",
+  "number": ""
+}
+{
+  "_id": ObjectId("1234"),
+  "name": "YY",
+  "street": "",
+  "number": ""
+}
+```
+
+**Boas práticas:**
+1. Evitar documentos grandes;
+2. Use nome de campos objetivos e curtos;
+3. Analise as suas queries utilizando explain();
+4. Atualiza apenas os campos que realemnte precisam ser alterados;
+5. Evite negaçõe em queries
+6. Lista/Arrays dentro dos documentos não podem crescer sem limites
+
+>Os dados no Mongo são armazenados com 
+[BSON](https://www.mongodb.com/resources/languages/bson#:~:text=BSON%20files%20are%20encoded%20before%20storing%20and%20decoded%20before%20displaying.&text=JSON%20is%20a%20human%2Dreadable,generated%20and%20not%20human%2Dreadable.&text=JSON%20has%20a%20specific%20set,array%2C%20object%2C%20and%20null.)
+
+## [DataBase] Quiz:
+1. MongoDB tem suporte a índices?
+Sim e seu funcionamento é igual ao dos Bancos de dados relacionais.
+
+2. Quais tipos de dados podem ser armazenados no Redis?
+A maioria dos tipos de dados como string, números JSON
+
+3. Qual o(s) método(s) que podemos utilizar para consultar um documento?
+db.collection.find({});
+
+4. Qual tipo de escalabilidade adiciona mais recurso na máquina?
+Escalabilidade vertical
+
+5. Quais os tipos de banco NoSql?
+Orientado a documentos, Chave-Valor, Grafo e Orientado à coluna/ familia de colunas
+
+6. Quais as linguagens de consulta utilizadas pelo Neo4j e Cassandra respectivamente?
+Cypher e CQL.
+
+7. Qual o(s) método(s) que podemos utilizar para criar um novo documento?
+db.collection.insertOne(), db.collection.insertMany(), db.collection.insert()
+
+8. Qual comando utilizado para criar um database no MondoDB?
+use <nome_database>
+
+9. MongoDB suporta SQL?
+Não, ele tem linguagem própria.
+
+10. O MongoDB suporta restrições de chave estrangeira?
+Não.
+
+## [DataBase] JDBC:
+[FlyWay](https://flywaydb.org)
+
+[LiquiBase](https://www.liquibase.com)
+
+[Datafaker](https://www.datafaker.net)
+
+## [DataBase] JDBC - Quiz:
+1. Como criar um banco de dados MySQL?
+Utilizando o comando CREATE DATABASE seguido do nome do banco.
+
+2. Para omitirmos o número da porta na connection String do JDBC qual critério a configuração do nosso banco deve atender?
+Estar configurado para receber conexões na porta padrão. Ex. MySQL estar configurado na porta 3306
+
+
+3. O que é o MySQL?
+Um sistema de gerenciamento de banco de dados relacional.
+
+4. Qual comando é utilizado para selecionar um banco de dados no MySQL?
+USE <nome_do_banco>
+
+5. Qual comando é utilizado para inserir dados em uma tabela no MySQL?
+INSERT INTO <tabela> VALUES (<valores>)
+
+6. Qual comando é utilizado para excluir dados de uma tabela no MySQL?
+DELETE FROM <tabela> WHERE <condição>
+
+7. O que acontece ao usar o comando DELETE sem uma cláusula WHERE?
+Todos os registros da tabela serão excluídos.
+
+8. Qual é o propósito do comando UPDATE?
+Alterar os dados existentes em uma tabela.
+
+9. Qual é a principal função de um trigger?
+Executar ações automáticas em resposta a eventos no banco de dados.
+
+10. O que uma View no MySQL permite fazer?
+Criar uma tabela temporária baseada em uma consulta.
+
+11. Qual comando cria um trigger no MySQL?
+CREATE TRIGGER
+
+12. Para que serve uma Procedure no MySQL?
+Automatizar operações complexas por meio de comandos SQL predefinidos.
+
+13. O que ocorre ao usar operações em lote no MySQL?
+As operações são agrupadas em uma única execução para melhorar o desempenho.
+
+14. O que faz o método rollback da classe Java.sql.Connection
+Reverte as alterações realizadas no banco de dados, quando se trabalha com a conexão configurada como connection.setAutoCommit(false)
+
+15. Qual a diferença de do método addBatch() e executeBatch()
+O addBatch adiciona os parâmetros para uma execução em lote e o executeBatch executa os lotes adicionados
+
+16. O que faz o método commit da classe Java.sql.Connection
+Grava as alterações realizadas no banco de dados, quando se trabalha com a conexão configurada como connection.setAutoCommit(false)
+
+17. Pensando em um cenário onde vamos criar uma query que os filtros dela não serão acessados pelo usuário do sistema ou a consulta não possui filtros qual seria a melhor opção entre connection.Statement() e connection.PrepareStatement (“consulta”) e porque:
+A opção statement pode ser usada sem problemas nesse cenário, pois como a consulta não poderá sofrer alterações diretamente do usuário não há riscos de um ataque de SQL Injection,mas é possível também usar a preparestatement
+
+18. O que faz o comando INNER JOIN?
+Busca os registros de uma tabela que tenham relação com os registros de outra tabela. Caso haja registros que não estão relacionados entre si, eles são excluídos da consulta
+
+19. Qual é uma característica de um relacionamento 1 para 1?
+Um registro em uma tabela corresponde a exatamente um registro na outra tabela.
+
+20. O que faz o comando LEFT JOIN?
+Busca os registros de uma tabela que tenham relação com os registros da outra tabela. Caso a tabela declarada no left join não tenha registros relacionados com a outra, esses registros são excluídos da consulta
+
+## [Boas Praticas](https://aline-antunes.gitbook.io/boas-praticas-para-apis-restful) Quiz:
+1. Qual é a principal vantagem das boas práticas no desenvolvimento de APIs RESTful?
+Facilitar a escalabilidade, legibilidade e consistência da API.
+
+2. Qual das seguintes afirmações é verdadeira sobre APIs RESTful?
+APIs RESTful são baseadas no conceito de recursos, que podem ser acessados via URLs.
+
+3. Qual é o identificador que representa um recurso em uma API RESTful?
+URL
+
+4. O que é um recurso em uma API RESTful?
+Qualquer objeto, dado ou serviço acessível pelo cliente.
+
+5. Por que é recomendado evitar verbos nos URLs de uma API?
+Porque os métodos HTTP já definem a ação a ser realizada.
+
+6. Qual é a principal razão para usar substantivos plurais em rotas de uma API?
+Para representar recursos de forma clara e intuitiva.
+
+7. Qual dos seguintes exemplos de rota está de acordo com a prática recomendada de usar substantivos plurais?
+GET /products/{id}
+
+8. Qual é a vantagem de utilizar hierarquia e aninhamento de URLs em uma API?
+Reflete a relação entre recursos de forma intuitiva.
+
+
+## [Padrões de Projetos](https://refactoring.guru/design-patterns)
+### 1. Criacionais
+Focam em como os objetos são criados, abstraindo o processo de instanciamento.
+
+| Padrão             | Descrição                                                                 | Exemplo comum                        |
+|--------------------|---------------------------------------------------------------------------|--------------------------------------|
+| **Singleton**      | Garante que exista apenas uma instância da classe                         | Logger, Configuração global          |
+| **Factory Method** | Delega a criação de objetos para subclasses                               | Criação de formas: `ShapeFactory`    |
+| **Abstract Factory** | Cria famílias de objetos relacionados sem especificar classes concretas | UI para diferentes SO (Windows/Mac)  |
+| **Builder**        | Constrói objetos complexos passo a passo                                  | Montagem de objetos `Pizza`, `Carro` |
+| **Prototype**      | Clona objetos existentes (cópia profunda ou rasa)                         | Clonagem de documentos               |
+
+---
+
+### 2. Estruturais
+Tratam da composição de classes e objetos, promovendo reutilização e flexibilidade.
+
+| Padrão         | Descrição                                                                 | Exemplo comum                              |
+|----------------|---------------------------------------------------------------------------|--------------------------------------------|
+| **Adapter**    | Converte a interface de uma classe para outra esperada                    | Adaptar API antiga para novo formato       |
+| **Bridge**     | Separa a abstração da implementação para variar independentemente         | Controle remoto com várias TVs             |
+| **Composite**  | Compõe objetos em estruturas de árvore para representar hierarquias       | Menus, sistemas de arquivos                |
+| **Decorator**  | Adiciona responsabilidades a um objeto dinamicamente                      | Adicionar borda ou sombra a um componente  |
+| **Facade**     | Fornece uma interface simplificada para um subsistema complexo            | Sistema de áudio ou home theater           |
+| **Flyweight**  | Usa compartilhamento para economizar memória com muitos objetos similares | Caracteres em um editor de texto           |
+| **Proxy**      | Controla o acesso a outro objeto (acesso remoto, lazy loading, etc.)      | Proxy de segurança ou cache                |
+
+---
+
+### 3. Comportamentais
+Focam na comunicação entre objetos e na forma como eles interagem.
+
+| Padrão                | Descrição                                                                 | Exemplo comum                               |
+|------------------------|---------------------------------------------------------------------------|---------------------------------------------|
+| **Observer**           | Notifica múltiplos objetos sobre mudanças de estado                      | Sistema de eventos, UI, notificações        |
+| **Strategy**           | Permite selecionar algoritmos em tempo de execução                        | Ordenações com critérios diferentes         |
+| **Command**            | Encapsula comandos como objetos, permitindo desfazer/refazer              | Botão "Desfazer" em editores                |
+| **State**              | Altera o comportamento de um objeto com base em seu estado interno        | Semáforo, máquina de vendas                 |
+| **Chain of Responsibility** | Passa a requisição por uma cadeia de manipuladores                   | Filtros de requisições HTTP                 |
+| **Mediator**           | Centraliza e coordena a comunicação entre objetos                         | Chat entre usuários                         |
+| **Template Method**    | Define o esqueleto de um algoritmo, delegando passos para subclasses      | Fluxos de processo com etapas customizáveis |
+| **Iterator**           | Permite percorrer coleções sem expor a estrutura interna                  | Loops em coleções (List, Set, etc.)         |
+| **Visitor**            | Permite adicionar novas operações a objetos existentes                   | Operações em árvores de sintaxe             |
+
+---
+
+## [Padrões de Projetos] Quiz:
+
+
+1. Como os padrões de projetos são classificados?
+criacionais, estruturais e comportamentais
+
+2. Quando falamos de padrões que fornecem mecanismos de criação de objetos e aumentam a flexibilidade e reutilização de código estamos falando de qual tipo de padrão?
+criacionais
+
+3. Quando falamos de padrões que auxiliam na criação de objetos e classes de grandes estruturas sem perder flexibilidade e eficácia, estamos falando de qual padrão?
+estruturais
+
+4. Quando falamos de padrões que visam definir responsabilidade entre os objetos e a forma que essas classes irão se comportar
+comportamentais
+
+5. O que é um padrão de projeto (desing pattern)?
+É uma proposta de solução de um problema existente. Para a aplicação de tal solução é necessário o bom entendimento do padrão que se deseja aplicar
