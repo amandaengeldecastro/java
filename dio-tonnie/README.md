@@ -1678,6 +1678,41 @@ phpinfo();
 
 ```
 
+Para verificar a memória e CPU
+```
+docker status <container>
+```
+
+Para editar a memória
+```
+docker update php-A<container> -m 128M --cpus 0.2
+```
+
+Para criar e especificar a memória
+```
+docker run --name ubuntu-C -dti -m 128M -- cpus 0.2 ubuntu
+```
+
+Informações do servidor
+```
+docker info
+```
+
+Logs de execução
+```
+docker container logs mysql-A
+```
+
+Rede
+```
+docker network ls
+```
+E para identificar a rede
+```
+docker network inspect <nomeRede>
+```
+
+
 
 ## [Docker] Quiz:
 O que são containers? 
@@ -1730,4 +1765,16 @@ docker volume create DIO
 
 12. Qual comando pode ser utilizado para referenciar um volume com o nome de data para a pasta /var/lib/mysql em um container que será executado com a imagem do mysql?
 docker run --name mysql-A -d -p 3306:3306 --volume=/data:/var/lib/mysql mysql
+
+13. Qual aplicação podemos utilizar para realizar um teste de stress no container?
+stress
+
+14. Qual comando pode ser utilizado para listar todos os containers em execução?
+docker container ls
+
+15. Qual comando pode ser utilizado para listar todas as imagens disponíveis em um host?
+docker image ls
+
+16. Qual comando é utilzado para atualizar a quantidade de memória em 128 megabytes em um container com o nome de php-A?
+docker update php-A -m 128M
 
