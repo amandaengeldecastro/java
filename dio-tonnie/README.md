@@ -19,6 +19,8 @@ Repository intended for carrying out exercises proposed by the DIO bootcamp.
 | 13    | `database-jdbc`|
 | 14    | `boas-praticas`|
 | 15    | `padrões-de-projetos`|
+| 16    | `docker`|
+| 17    | `kubernets`|
 
 
 
@@ -1712,8 +1714,146 @@ E para identificar a rede
 docker network inspect <nomeRede>
 ```
 
+Dockerfile
+```
+# docker run -dti --name ubuntu-python ubuntu
+# docker exec -ti ubuntu-python bash
+
+# apt install python3 nano
+2# apt clean
+
+	nome = input("Qual é o seu nome? ")
+	print (nome)
+
+nano dockerfile
+
+FROM ubuntu
+RUN apt update && apt install -y python3 && apt clean
+COPY app.py /opt/app.py
+CMD python3 /opt/app.py
+
+# docker build . -t python-ubuntu
+dc
+
+```
+Imagem personalidaza do Apache
+```
+wget http://site1368633667.hospedagemdesites.ws/site1.zip
+
+Dockerfile
+==================
+
+FROM debian
+RUN apt-get update && apt-get install -y apache2 && apt-get clean
+
+ENV APACHE_LOCK_DIR="/var/lock"
+ENV APACHE_PID_FILE="/var/run/apache2.pid"
+ENV APACHE_RUN_USER="www-data"
+ENV APACHE_RUN_GROUP="www-data"
+ENV APACHE_LOG_DIR="/var/log/apache2"
+
+ADD site.tar /var/www/html
+LABEL description="Apache Webserver 1.0"
+VOLUME /var/www/html/
+EXPOSE 80
+ENTRYPOINT ["/usr/sbin/apachectl"]
+CMD ["-D", "FOREGROUND"]
+
+======================
+
+# docker image build -t debian-apache:1.0 .
+# docker run  -dti -p 80:80 --name meu-apache debian-apache:1.0
+
+```
+> EntryPoint para exectar em segundo plano e CMD em primeiro plano
+
+Imagem personalizada
+```
+nome = input("Qual é o seu nome? ")
+	print (nome)
 
 
+=====================================
+
+FROM python
+
+WORKDIR /usr/src/app
+
+COPY app.py /usr/src/app
+
+CMD [ "python", "./app.py" ]
+```
+Multistage
+```
+docker pull golang
+docker pull alpine
+
+============================================================
+
+package main
+import (
+    "fmt"
+)
+
+func main() {
+  fmt.Println("Qual é o seu nome:? ")
+  var name string
+  fmt.Scanln(&name)
+  fmt.Printf("Oi, %s! Eu sou a linguagem Go! ", name)
+}
+
+
+=============================================================
+FROM golang as exec
+
+COPY app.go /go/src/app/
+
+ENV GO111MODULE=auto
+
+WORKDIR /go/src/app
+
+RUN go build -o app.go .
+
+FROM alpine
+
+WORKDIR /appexec
+COPY --from=exec /go/src/app/ /appexec
+RUN chmod -R 755 /appexec
+ENTRYPOINT ./app.go
+
+==============================================================
+
+# docker image build -t app-go:1.0 .
+# docker run -ti app-go:1.0
+```
+
+Upload para o hub
+```
+docker login
+docker build . -t nome-de-usuário/my-go=app:1.0
+docker push nome-deu-usuário/my-go=app:1.0
+
+```
+
+Criando servidor de imagens
+```
+docker run -d -p 5000:5000 --restart=always --name registry registry:2
+docker logout
+docker image tag [id] localhost:5000/meu-apache:1.0
+curl localhost:5000/v2/_catalog
+
+docker push  localhost:5000/my-go-app:1.0
+
+nano /etc/docker/daemon.json 
+
+	{ "insecure-registries":["10.0.0.189:5000"] }
+	
+
+systemctl restart docker
+
+docker push  localhost:5000/my-go-app:1.0
+
+```
 ## [Docker] Quiz:
 O que são containers? 
 https://www.ibm.com/br-pt/cloud/learn/containers
@@ -1778,3 +1918,81 @@ docker image ls
 16. Qual comando é utilzado para atualizar a quantidade de memória em 128 megabytes em um container com o nome de php-A?
 docker update php-A -m 128M
 
+17. Parâmetro do arquivo docker file que indica o diretório padrão da aplicação da imagem?
+WORKDIR
+
+18. O que é um registry?
+Registry é o nome dado para um repositório de imagens
+
+19. Qual comando é utilizado para gerar uma imagem a partir de um docker file?
+docker image build
+
+20. Comando utilizado para realizar o upload de imagens para um registry?
+docker push
+
+## [Kubernets]:
+Ferramenta de orquestração de containers desenvolvida pela Google. Qunado usar?
+1. Migração de aplicações monolíticas para microsserviços;
+2. Disponibilidade da aplicação (diminuição de downtime);
+3. Escalabilidade e alta performance;
+4. Recuperação de desastre.
+
+Como utilizar:
+1. Criar um cluster Kubernets - cada servidor tem um node(nó) e dentro de cada nó, criamos os pods;
+2. Implantar um aplicativo ;
+3. Expore seu aplicativo;
+4. Exponha seu aplicativo publicamente;
+5. Escale seu aplicativo;
+6. Atualize seu aplicativo;
+
+Pod é a menor aplicação de um container, e cada pod deve ser destinado para uma aplicação (um para java, um para BD...)
+
+MiniKube: cria um nó único
+```
+minikube start
+minikube status
+minikube stop
+```
+Kubectl: permite executar comando Kubernets via linha de comando
+
+Deployment with yaml: https://spacelift.io/blog/kubernetes-deployment-yaml
+
+## [Kubernets] Quiz:
+1. O que são microsserviços?
+Microsserviços são uma abordagem arquitetônica e organizacional do desenvolvimento de software na qual o software consiste em pequenos serviços independentes que se comunicam usando APIs bem definidas. Esses serviços pertencem a pequenas equipes autossuficientes.
+
+2. Como podemos definir o Kubernetes?
+Kubernetes (K8s) é um produto Open Source utilizado para automatizar a implantação, o dimensionamento e o gerenciamento de aplicativos em contêiner.
+
+3. Como podemos definir um cluster?
+Um cluster (do inglês cluster : 'grupo, aglomerado') consiste em computadores ligados que trabalham em conjunto, de modo que, em muitos aspectos, podem ser considerados como um único sistema.
+
+4. Como podemos definir um contêiner?
+Os contêineres são uma tecnologia usada para reunir um aplicativo e todos os seus arquivos necessários em um ambiente de tempo de execução. Como uma unidade, o contêiner pode ser facilmente movido e executado em qualquer sistema operacional, em qualquer contexto.
+
+5. Como podemos definir o kubectl?
+A ferramenta de linha de comando do Kubernetes, kubectl, permite executar comandos em clusters do Kubernetes. Você pode usar o kubectl para implantar aplicativos, inspecionar e gerenciar recursos de cluster e visualizar logs.
+
+6. O que é o Minikube?
+Minikube é um utilitário que você pode usar para executar o Kubernetes (k8s) em sua máquina local. Ele cria um cluster de nó único contido em uma máquina virtual (VM).
+
+7. No Windows, para que o kubectl esteja disponível em todos os diretórios do sistema, é necessário configurar qual variável do sistema?
+path
+
+8. Qual comando é utilizado para iniciar o Minikube?
+minikube start
+
+9. Qual como é utilizado para excluir um pod com o nome de app-html?
+kubectl delete pod app-html
+
+10. Qual comando pode ser utilizar para o expor um deployment com o nome de app-html no formato de load balancer utilizando a porta 80?
+kubect expose deployment app-html --type=LoadBalancer --name app-html --port 80
+
+
+11. Comando utilizar para visualizar os Pods em execução em um cluster Kubernetes?
+kubectl get pod
+
+12. Qual comando é utilizando para implementar um pod a partir de um arquivo YAML com o nome de pods.yml?
+kubect apply -f pod.yml
+
+>Desafio: deploy from https://github.com/denilsonbonatti/k8s-projeto1-app-base
