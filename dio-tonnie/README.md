@@ -1345,6 +1345,7 @@ Reflete a relação entre recursos de forma intuitiva.
 
 
 ## [Padrões de Projetos](https://refactoring.guru/design-patterns)
+[Código Limpo](https://drive.google.com/file/d/0B9eZlIWAs3-sN3NRbktQNVFUN3l2cTBBcXN4Y3FaUQ/view?resourcekey=0-ZafqCRtyIP8Zw0CKviW5Gw)
 ### 1. Criacionais
 Focam em como os objetos são criados, abstraindo o processo de instanciamento.
 
@@ -1390,7 +1391,15 @@ Focam na comunicação entre objetos e na forma como eles interagem.
 
 ---
 
-## [Padrões de Projetos] Quiz:
+**SOLID**
+Acrônimo dos 5 principios fundametais criado pelo Uncle Bob para arquitetura robusta e de fácil manutenção:
+SRP - Single Responsability Principle: princípio de responsabilidade única;
+OCP - Open/Closed Principle:  as classes devem ser fechadas para modificações mas devem ser extensíveis;
+LSP - Likov Substitution Principle: objetos de um tipo de base devem ser substituíveis por instâncias de um subtipo;
+ISP - Interface Segregation Principle: interfaces com responsabilidade única;
+DIP - Dependency Inversion Principle: módulos devem depender das interfaces e não de implementações específicas;
+
+## [Padrões de Projetos  + SOLID] Quiz:
 
 
 1. Como os padrões de projetos são classificados?
@@ -1407,3 +1416,318 @@ comportamentais
 
 5. O que é um padrão de projeto (desing pattern)?
 É uma proposta de solução de um problema existente. Para a aplicação de tal solução é necessário o bom entendimento do padrão que se deseja aplicar
+
+6. Classes devem ser especialistas em uma única tarefa ao invés de realizar N tarefas diz respeito a qual dos princípios?
+SRP – Single Responsibility Principle (principio da responsabilidade única)
+
+7. Qual das opções a seguir não representa um dos princípios do SOLID?
+DRY – Dont Repeat Yourself
+
+8. Interfaces com muitas funcionalidades não coesas devem ser divididas em interfaces menores diz respeito a qual dos princípios?
+ISP – Interface Segregation Principle (principio da segregação de interface)
+
+9. Partes que compõe o nosso software devem ser fechados para modificações mas abertos para extensões diz respeito a qual dos princípios?
+OCP – Open/Closed Principle (principio do aberto e fechado)
+
+10. Qual das alternativas a seguir NÃO é uma técnica comum de refatoração?
+Deixar funções e métodos com mais de 100 linhas
+
+11. Qual é o principal objetivo da refatoração de código?
+Melhorar a legibilidade e a manutenção do código
+
+12. Refatoração de código normalmente acontece em qual fase do desenvolvimento?
+Durante o ciclo de desenvolvimento, quando o código precisa ser melhorado
+
+13. Qual das seguintes práticas é parte do processo de refatoração?
+Substituir um código complexo por uma versão mais simples
+
+**[Anotations](https://github.com/digitalinnovationone/annotation-processor/tree/main/processor)**
+Dependência: Guava
+
+1. Em que momento as annotations com retenção RUNTIME podem ser acessadas?
+Apenas durante a execução do código
+
+2. O que as annotations em runtime permitem fazer no código?
+Armazenar informações sobre o código durante a execução
+
+3. Qual das estruturas a seguir representam uma annotation?
+public @interface Builder {}
+
+4. Quando queremos que uma annotation seja usada para marcar um método, qual das opções a seguir devemos usar ?
+@Target(METHOD)
+
+5. Qual o nome do arquivo que devemos criar para funcionamento de annotation processor customizado e onde ele deve ser colocado?
+O arquivo deve ser chamado “javax.annotation.processing.Processor” e deve estar localizado em src/main/resources/META-INF/services
+
+6. Como definimos uma propriedade obrigatória em uma annotation ?
+"public @interface Builder { String value(); }"
+
+7. Como definimos uma propriedade opcional em uma annotation?
+"public @interface Builder { String value() default “”; }"
+
+8. Qual a diferença entre a configuração @Retention(SOURCE) e @Retention(RUNTIME)?
+A configuração runtime usamos para marcar nosso código para trabalhar com reflection e a configuração de source usamos para marcar o código e usa-lo no build
+
+## [Docker]:
+Download de uma imagem do DockerHub
+```
+docker pull <imagem>
+docker pull hello-world
+docker pull ubuntu
+```
+Verificar images
+```
+docker images
+```
+Executar a imagem
+```
+docker run hello-world
+docker run ubuntu
+```
+Containers em execução
+```
+docker ps
+```
+Docker executados recentemente
+```
+docker ps -a
+```
+Executar um container por 10 s
+```
+docker run ubuntu sleep 10
+```
+Acesso remoto
+```
+ssh root@10.0.0.181
+```
+Parar containeir pelo id ou name
+```
+docker stop <name>
+```
+Acessar o bash, logando como root dentro do container. Com o 'd' retorna o id
+```
+docker --help
+docker run -dti ubuntu
+```
+Para sair do bash
+```
+exit
+```
+Para executar o container por id
+```
+docker exec -it 388<id> /bin/bash
+docker exec -it 388 cat /etc/*release*
+```
+Aplicação nano
+```
+apt update
+apt upgrade -y
+apt -y install nano
+nano arquivo.txt
+exit
+```
+Parar a plicação
+```
+docker stop 388
+```
+Exclui containers parados
+```
+docker rm 388
+```
+Excluir imagens paradas
+```
+docker images
+docker rmi hello-world
+docker rmi ubuntu
+```
+> Se uma imagem não estiver na máquina, ele vai executar o download automaticamente
+
+Para nomear um container
+```
+docker run -dti --name Ubuntu-A ubuntu
+docker run -dti --name Ubuntu-A ubuntu
+```
+Copiar arquivos para o container dentro do bash
+```
+docker exec -ti Ubuntu-A /bin/bash
+mkdir /destino
+rm -R destino
+exit
+```
+Copiar arquivos para container de fora do bash
+```
+docker exec Ubuntu-A mkdir /destino
+docker cp MeuArquivo.txt Ubuntu-A:/destino
+```
+Listar o arquivo 
+```
+docker exec Ubuntu-A ls /destino -l
+```
+Descompactar um zip
+```
+unzip meuzip.zip
+```
+Copiar arquivo do container para dentro da máquina
+```
+docker cp Ubuntu-A:/destino/Meuzip.zip Zipcopia.zip
+```
+Tags: quando tenho uma versão específica
+```
+docker pull debian:9
+```
+Criando container do MySQL
+> É preciso especificar variáveis de ambiente: root e password e a porta (host:container)
+
+```
+docker pull mysql
+docker run -e MYSQL_ROOT_PASSWORD=senha123 --name mysql-A -d -p 3306:3306 mysql
+```
+Acessar o MySQL
+```
+docker exec -it mysql-A bash
+```
+Comando para criar um banco de dados
+```
+mysql -u root -p --protocol=tcp
+```
+Criar um database
+```
+CREATE DATABASE aula;
+```
+Para ver os databases
+```
+show databases
+```
+Para buscar o IP daquela exposição
+```
+docker inspect mysql-A
+apt -y install mysql-client
+```
+Reiniciar um container
+```
+docker start mysql-A
+```
+Para não perder os dados, é preciso mapear os dados para fora do container. Procurar o Mounts e o destination:
+```
+docker inspect mysql-A
+mkdir /data
+mkdir /data/mysql-A
+docker rm mysql-A
+docker run -e MYSQL_ROOT_PASSWORD=Senha123 --name mysql-A -d -p3306:3306 --volume=/data/mysql-A:var/lib/mysql mysql
+```
+Tipos de volumes ou montagems para  dados persistentes:
+1. Bind mounts: vincular um determinado diretório ou arquivo do host dentro do container
+```
+docker run -v/hostdir:/containerdir mysql
+```
+2. Named volumes: é criado dentro do diretório padrão do docker.
+
+>ro = read-only
+
+```
+docker volume create nome-do-volume
+docker run -v mysql_data:/containerdir mysql
+
+****bind mount *****
+
+docker run -dti --mount type=bind,src=/opt/teste,dst=/teste debian
+
+docker run -dti --mount type=bind,src=/opt/teste,dst=/teste,ro debian
+
+***volumes****
+
+docker volume create teste
+docker volume ls
+
+	/var/lib/docker/volumes/teste/_data
+	
+docker run -dti --mount type=volume,src=teste,dst=teste debian
+
+docker volume rm teste
+
+```
+3. Dockerfile volumes: 
+Diferente do named volumes, não são determinados pelo nome e é útil para salvar dados persistentes
+
+```
+docker run  --name apache-A -d -p 80:80 --volume=/data/apache-A:/usr/local/apache2/htdocs/ httpd
+
+docker run  --name php-A -d -p 8080:80 --volume=/data/php-A:/var/www/html php:7.4-apache
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>Exemplo Apache</title>
+</head>
+<body>
+<h1> OK !! Apache funcionando!!!!! </h1>
+</body>
+</html>
+
+
+
+
+<?php
+phpinfo();
+?>
+
+
+```
+
+
+## [Docker] Quiz:
+O que são containers? 
+https://www.ibm.com/br-pt/cloud/learn/containers
+https://www.redhat.com/pt-br/topics/containers
+
+Diferenças entre containers e máquinas virtuais (VMs)
+https://www.redhat.com/pt-br/topics/containers/containers-vs-vms
+ 
+O que é Docker?
+https://www.redhat.com/pt-br/topics/containers/what-is-docker
+https://docs.microsoft.com/pt-br/dotnet/architecture/microservices/container-docker-introduction/docker-defined
+
+Comandos essenciais 
+https://medium.com/xp-inc/principais-comandos-docker-f9b02e6944cd
+https://docs.docker.com/engine/reference/commandline/docker/
+https://dev.to/soutoigor/docker-imagens-containers-e-seus-principais-comandos-23p6
+
+1. Como podemos definir virtualização?
+A virtualização utiliza software para criar uma camada de abstração sobre o hardware do computador, permitindo que os recursos de hardware de um único computador (processadores, memória, armazenamento, etc) sejam divididos em vários computadores virtuais.
+
+2. Como podemos definir um contêiner?
+Os contêineres são uma tecnologia usada para reunir um aplicativo e todos os seus arquivos necessários em um ambiente de tempo de execução. Como uma unidade, o contêiner pode ser facilmente movido e executado em qualquer sistema operacional, em qualquer contexto.
+
+3. Como podemos definir o modelo cliente-servidor?
+O modelo cliente-servidor é uma estrutura de aplicação que distribui as tarefas e cargas de trabalho entre os fornecedores de um recurso ou serviço, designados como servidores, e os requerentes dos serviços, designados como clientes.
+
+4. Microsserviços são uma abordagem arquitetônica e organizacional do desenvolvimento de software na qual o software consiste em pequenos serviços independentes que se comunicam usando APIs bem definidas. Esses serviços pertencem a pequenas equipes autossuficientes.
+
+5. Qual comando é utilizado para receber informações detalhadas sobre um container em execução?
+docker inspect
+
+6. Qual comando é utilizado para baixar uma imagem do ubuntu?
+docker pull ubuntu
+
+7. Como copiar um arquivo com o nome de arquivo.txt para uma pasta /aula presente em um container com o nome de Ubuntu-A?
+docker cp arquivo.txt Ubuntu-A:/aula/
+
+8. Qual comando é utilizado para executar um conteiner com a imagem do ubuntu?
+docker run ubuntu
+
+9. Qual comando é utilizado para criar um volume com o nome de DIO?
+docker volume create DIO
+
+10. Qual parâmetro do comando docker run é utilizado para indicar o nome do container?
+--name
+
+11. Qual parâmetro do comando docker run é utilizado para referenciar as portas utilizadas pelo container?
+-p
+
+12. Qual comando pode ser utilizado para referenciar um volume com o nome de data para a pasta /var/lib/mysql em um container que será executado com a imagem do mysql?
+docker run --name mysql-A -d -p 3306:3306 --volume=/data:/var/lib/mysql mysql
+
