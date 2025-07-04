@@ -12,10 +12,11 @@ This repository is intended to store a merge of all of mine study projects produ
 
 🖥️ **In Progress**
 
-| Status  | Project           | Initial Data | 
-|---------|-------------------|--------------|
-| ✅      | `pascal-triangle` | 2021-11-19   | 
-| 🖥️ | `dio-tonnie` | 2025-05-28 | 
-| 🖥️ | `jsp` | 2025-06-06 | 
-| 🔄 | `spring-mvc-crud-mysql` | 2025-04-01 | 
-| 📌 | `al-carbon-calc-mongodb-gradle`<br>`compass-uol-2022`<br>`digiage`<br>`dio-gft`<br>`imersao-alura-spring-mongodb-docker`<br>`java-17-spring-boot-crud-mysql`<br>`android-studio`| | 
+| Status  | Project                 | Initial Data | 
+|---------|-------------------------|--------------|
+| ✅      | `pascal-triangle`       | 2021-11-19   | 
+| ✅      | `dio-tonnie`            | 2025-05-28   | 
+| 🖥️      | `dio-ntt`               | 2025-07-01   | 
+| 🖥️      | `jsp`                   | 2025-06-06   | 
+| 🔄      | `spring-mvc-crud-mysql` | 2025-04-01   | 
+| 📌      | `al-carbon-calc-mongodb-gradle`<br>`compass-uol-2022`<br>`digiage`<br>`dio-gft`<br>`imersao-alura-spring-mongodb-docker`<br>`java-17-spring-boot-crud-mysql`<br>`android-studio`| | 
