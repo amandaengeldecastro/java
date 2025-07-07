@@ -1,26 +1,7 @@
 # ⚠️ [ INPROGRESS ] ⚠️
-O código esta funcional, entretanto, fora baseado no projeto do desafio DIO [Criando um aplicativo de Controle de Transações Financeiras com POO](https://web.dio.me/project/criando-um-aplicativo-de-controle-de-transacoes-financeiras-com-poo). Por isso, esta passando por algumas melhorias, incluindo validações e muito em breve, serão incluidas novas funcionalidades. Abaixo, você poderá acompanhar alguns dos testes já realizados:
+ [Criando um aplicativo de Controle de Transações Financeiras com POO](https://web.dio.me/project/criando-um-aplicativo-de-controle-de-transacoes-financeiras-com-poo).
 
-# [Casos de Teste] Método: `createAccount`
-## Descrição
-O método `createAccount` permite que o usuário registre uma conta com uma ou várias chaves Pix. 
-Os dados de entrada devem obedecer as seguintes regras:
-1. `chave pix`: 
-    - composto por alfanuméricos
-    - não deve conter caracteres especiais
-    - pode cadastrar uma única chave pix ou múltiplas separadas por ponto e vírgula (`;`). 
-2. `taxa`:
-    - deve ser um número inteiro
-3. `depósito`
-    - deve ser um Long <!--TODO: Float-->
----
-
-### **Caso de Teste 1: Entrada de Um Único Pix Válido**
-- **Entrada:**  
-  `123456789`
-- **Esperado:**  
-  O sistema deve criar a conta com sucesso com a chave Pix `123456789`.
-- **'Log':**  
+## Testes
 ```
 ========================================
 Seja bem-vindo(a) ao DIOBank!
@@ -43,22 +24,14 @@ Selecione a opção desejada!
 ========================================
 1
 Digite as chaves pix que deseja cadastrar (separadas por ponto&virgula - ';'):
-123456789
+teste
 Digite o valor inicial de depósito:
-1220
-Chave(s) pix: [123456789] criada(s) com sucesso!
-```
-
-### **Caso de Teste 2: Entrada de multiplos pix separados por caracter diferente de ';' e alfanuméricos**
-- **Entrada:**  
-  `123456789.987654321`
-- **Esperado:**  
-  O sistema deve retornar uma mensagem de erro.
-- **Log:**  
-```
-========================================
-Seja bem-vindo(a) ao DIOBank!
-Selecione a opção desejada!
+1000
+Criando AccountWallet com saldo inicial: 1000
+Adicionando valor = 1000, descrição = valor de criação da conta
+Saldo atual: R$ 1000
+Saldo após criação: 1000
+Chave(s) pix: [teste] criada(s) com sucesso!
 ========================================
 1  - Criar uma conta
 2  - Criar um investimento
@@ -77,124 +50,14 @@ Selecione a opção desejada!
 ========================================
 1
 Digite as chaves pix que deseja cadastrar (separadas por ponto&virgula - ';'):
-123456789.987654321
-Erro: As chaves Pix devem ser alfanuméricas e, se houver mais de uma, devem ser separadas por ponto e vírgula (';').
-```
-
-### **Caso de Teste 3: Entrada de Vários Pix Válidos mas com dados já criados anteriormente**
-- **Entrada:**  
-  `ABC123XYZ;123ABCXYZ`
-  > Deve-se executar duas vezes a mesma criação de conta com as chaves pix acima. 
-- **Esperado:**  
-  O sistema deve criar a conta com sucesso com as chaves Pix `ABC123XYZ` e `123ABCXYZ`.
-- **Log:**  
-```
-========================================
-Seja bem-vindo(a) ao DIOBank!
-Selecione a opção desejada!
-========================================
-1  - Criar uma conta
-2  - Criar um investimento
-3  - Fazer um investimento
-4  - Depositar na conta
-5  - Sacar da conta
-6  - Transferir entre contas
-7  - Investir
-8  - Sacar investimento
-9  - Listar contas
-10 - Listar investimento
-11 - Listar carteiras de investimento
-12 - Atualizar investimento
-13 - Historico de conta
-14 - Sair
-========================================
-1
-Digite as chaves pix que deseja cadastrar (separadas por ponto&virgula - ';'):
-ABC123XYZ;123ABCXYZ
+teste2
 Digite o valor inicial de depósito:
-123
-Chave(s) pix: [ABC123XYZ, 123ABCXYZ] criada(s) com sucesso!
-========================================
-1  - Criar uma conta
-2  - Criar um investimento
-3  - Fazer um investimento
-4  - Depositar na conta
-5  - Sacar da conta
-6  - Transferir entre contas
-7  - Investir
-8  - Sacar investimento
-9  - Listar contas
-10 - Listar investimento
-11 - Listar carteiras de investimento
-12 - Atualizar investimento
-13 - Historico de conta
-14 - Sair
-========================================
-1
-Digite as chaves pix que deseja cadastrar (separadas por ponto&virgula - ';'):
-ABC123XYZ;123ABCXYZ
-Digite o valor inicial de depósito:
-123
-A chave ABC123XYZ já está em uso. Tente novamente com uma chave Pix diferente.
-```
-
-### **Caso de Teste 4: Entrada com Caracteres Especiais em um Pix**
-- **Entrada:**  
-  `123456789@;987654321`
-- **Esperado:**  
-  O sistema deve rejeitar a entrada e exibir a mensagem de erro:  
-  `"Erro: A(s) chave(s) Pix devem ser alfanuméricas e, se houver mais de uma, devem ser separadas por ponto e vírgula (';')."`
-- **Log**
-```
-========================================
-Seja bem-vindo(a) ao DIOBank!
-Selecione a opção desejada!
-========================================
-1  - Criar uma conta
-2  - Criar um investimento
-3  - Fazer um investimento
-4  - Depositar na conta
-5  - Sacar da conta
-6  - Transferir entre contas
-7  - Investir
-8  - Sacar investimento
-9  - Listar contas
-10 - Listar investimento
-11 - Listar carteiras de investimento
-12 - Atualizar investimento
-13 - Historico de conta
-14 - Sair
-========================================
-1
-Digite as chaves pix que deseja cadastrar (separadas por ponto&virgula - ';'):
-123456789@;987654321
-Erro: As chaves Pix devem ser alfanuméricas e, se houver mais de uma, devem ser separadas por ponto e vírgula (';')
-```
-
-# [Casos de Teste] Método: `createInvestment`
-## Descrição
-O método `createInvestment` permite que o usuário crie um investimento. Para isso, o id de investimento será criado automaticamente, e você é o responsável por passar a taxa do investimento e o valor inicial do depósito para investimento.
-Os dados de entrada devem obedecer as seguintes regras:
-1. `taxa de investimento`: 
-    - deve ser um número inteiro <!--TODO: Limitar porcentagem de taxa mínima e máxima-->
-    - não deve conter caracteres especiais
-    - pode cadastrar uma única chave pix ou múltiplas separadas por ponto e vírgula (`;`). 
-2. `deposito inicial`:
-    - deve ser um número inteiro <!--TODO: Float-->
-3. `depósito`
-    - deve ser um Long 
----
-### **Caso de Teste 1: Entrada válida**
-- **Entradas:**  
-  `12`
-  `123`
-- **Esperado:**  
-Retorno da mensagem 'Investimento de id 1 no valor de R$123 com taxa de 12%, criado com sucesso!'
-- **'Log':**  
-```
-========================================
-Seja bem-vindo(a) ao DIOBank!
-Selecione a opção desejada!
+1500
+Criando AccountWallet com saldo inicial: 1500
+Adicionando valor = 1500, descrição = valor de criação da conta
+Saldo atual: R$ 1500
+Saldo após criação: 1500
+Chave(s) pix: [teste2] criada(s) com sucesso!
 ========================================
 1  - Criar uma conta
 2  - Criar um investimento
@@ -213,31 +76,171 @@ Selecione a opção desejada!
 ========================================
 2
 Digite a taxa de investimento:
-12 
+10
 Digite o valor inicial de depósito:
-123
-Investimento de id 1 no valor de R$123 com taxa de 12% ,criado com sucesso!
+10
+Investimento de id 1 no valor de R$10 com taxa de 10%, criado com sucesso!
+========================================
+1  - Criar uma conta
+2  - Criar um investimento
+3  - Fazer um investimento
+4  - Depositar na conta
+5  - Sacar da conta
+6  - Transferir entre contas
+7  - Investir
+8  - Sacar investimento
+9  - Listar contas
+10 - Listar investimento
+11 - Listar carteiras de investimento
+12 - Atualizar investimento
+13 - Historico de conta
+14 - Sair
+========================================
+3
+Digite a chave pix da conta de origem:
+teste2
+Digite o identificador do investimento:
+1
+Carteira de investimento criada com sucesso!
+Serviço: INVESTMENT
+Saldo inicial: R$10
+Transações registradas: 20
+========================================
+1  - Criar uma conta
+2  - Criar um investimento
+3  - Fazer um investimento
+4  - Depositar na conta
+5  - Sacar da conta
+6  - Transferir entre contas
+7  - Investir
+8  - Sacar investimento
+9  - Listar contas
+10 - Listar investimento
+11 - Listar carteiras de investimento
+12 - Atualizar investimento
+13 - Historico de conta
+14 - Sair
+========================================
+4
+Digite a chave pix da conta que deseja depositar:
+teste2
+Digite o valor do depósito:
+20
+Adicionando valor = 20, descrição = depósito na conta 
+Saldo atual: R$ 1510
+Depósito de R$20 realizado com sucesso!
+========================================
+1  - Criar uma conta
+2  - Criar um investimento
+3  - Fazer um investimento
+4  - Depositar na conta
+5  - Sacar da conta
+6  - Transferir entre contas
+7  - Investir
+8  - Sacar investimento
+9  - Listar contas
+10 - Listar investimento
+11 - Listar carteiras de investimento
+12 - Atualizar investimento
+13 - Historico de conta
+14 - Sair
+========================================
+5
+Digite a chave pix da conta que deseja sacar:
+teste
+Digite o valor do saque:
+20
+Saque de R$20 realizado com sucesso!
+Saldo atual da conta: R$980
+========================================
+1  - Criar uma conta
+2  - Criar um investimento
+3  - Fazer um investimento
+4  - Depositar na conta
+5  - Sacar da conta
+6  - Transferir entre contas
+7  - Investir
+8  - Sacar investimento
+9  - Listar contas
+10 - Listar investimento
+11 - Listar carteiras de investimento
+12 - Atualizar investimento
+13 - Historico de conta
+14 - Sair
+========================================
+6
+Digite a chave pix da conta de origem:
+teste2
+Digite a chave pix da conta de destino:
+teste
+Digite o valor da transferência:
+350
+Adicionando valor = 350, descrição = Recebido via transferência de teste2
+Saldo atual: R$ 1330
+Transferência de R$350 realizada com sucesso!
+Saldo atual da conta de origem (teste2): R$1160
+Transferência de R$350 realizada com sucesso!
+Saldo atual da conta de origem (teste2): R$1160
+========================================
+1  - Criar uma conta
+2  - Criar um investimento
+3  - Fazer um investimento
+4  - Depositar na conta
+5  - Sacar da conta
+6  - Transferir entre contas
+7  - Investir
+8  - Sacar investimento
+9  - Listar contas
+10 - Listar investimento
+11 - Listar carteiras de investimento
+12 - Atualizar investimento
+13 - Historico de conta
+14 - Sair
+========================================
+13
+Digite a chave pix da conta que deseja consultar o extrato:
+teste
+Escolha o período do extrato:
+1 - Extrato do dia
+2 - Últimos 30 dias
+1
+2025-07-07T13:29:41-03:00 - valor de criação da conta: R$1000 (x980)
+2025-07-07T13:31:14-03:00 - Recebido via transferência de teste2: R$350 (x350)
+
+========================================
+1  - Criar uma conta
+2  - Criar um investimento
+3  - Fazer um investimento
+4  - Depositar na conta
+5  - Sacar da conta
+6  - Transferir entre contas
+7  - Investir
+8  - Sacar investimento
+9  - Listar contas
+10 - Listar investimento
+11 - Listar carteiras de investimento
+12 - Atualizar investimento
+13 - Historico de conta
+14 - Sair
+========================================
+12
+Investimento atualizado com sucesso!
+========================================
+1  - Criar uma conta
+2  - Criar um investimento
+3  - Fazer um investimento
+4  - Depositar na conta
+5  - Sacar da conta
+6  - Transferir entre contas
+7  - Investir
+8  - Sacar investimento
+9  - Listar contas
+10 - Listar investimento
+11 - Listar carteiras de investimento
+12 - Atualizar investimento
+13 - Historico de conta
+14 - Sair
+========================================
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Conclusão
-Os casos de teste acima cobrem a maioria das situações em que o sistema deve validar as chaves Pix fornecidas pelo usuário. A validação garante que as chaves Pix sejam alfanuméricas e que, caso haja múltiplas chaves, elas sejam separadas corretamente por ponto e vírgula (`;`).
+> Execução da listagem de contas, investimentos e carteiras passará por refatoração

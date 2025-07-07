@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import br.com.dio.model.MoneyAudit;
 
 import br.com.dio.exception.AccountNotFoundException;
 import br.com.dio.exception.PixInUseException;
 import br.com.dio.model.AccountWallet;
+import br.com.dio.model.Money;
 
 public class AccountRepository {
     private final List<AccountWallet> accounts = new ArrayList<>();
@@ -48,10 +50,23 @@ public class AccountRepository {
         var source = findByPix(sourcePix);
         CommonsRepository.checkFundsForTransaction(source, amount);
         var target = findByPix(targetPix);
-        source.reduceMoney(amount);
-        var message = "transferência de " + sourcePix + " para " + targetPix;
-        target.addMoney(source.reduceMoney(amount), source.getService(), message);
 
+        source.reduceMoney(amount);
+
+        List<Money> moneyToAdd = new ArrayList<>();
+        var audit = new MoneyAudit(UUID.randomUUID(), source.getService(),
+                "Transferência de " + amount + " de " + sourcePix + " para " + targetPix,
+                OffsetDateTime.now());
+
+        for (int i = 0; i < amount; i++) {
+            var money = new Money(audit);
+            moneyToAdd.add(money);
+        }
+
+        target.addMoney(amount, "Recebido via transferência de " + sourcePix);
+
+        System.out.println("Transferência de R$" + amount + " realizada com sucesso!");
+        System.out.println("Saldo atual da conta de origem (" + sourcePix + "): R$" + source.getFunds());
     }
 
     public AccountWallet findByPix(final String pix) {

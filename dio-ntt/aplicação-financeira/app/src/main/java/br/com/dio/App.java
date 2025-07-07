@@ -108,7 +108,7 @@ public class App {
             if (!input.matches(regex)) {
                 System.out.println(
                         "Erro: A(s) chave(s) Pix devem ser alfanuméricas e, se houver mais de uma, devem ser separadas por ponto e vírgula (';').");
-                return; 
+                return;
             }
 
             var pix = Arrays.stream(input.split(";")).toList();
@@ -131,17 +131,17 @@ public class App {
             tax = scanner.nextInt();
         } catch (InvalidArgumentException e) {
             System.out.println("Erro: A taxa de investimento deve ser um número inteiro.");
-            scanner.nextLine(); 
+            scanner.nextLine();
             return;
         }
 
         System.out.println("Digite o valor inicial de depósito:");
         try {
-            initialFunds = scanner.nextLong(); 
+            initialFunds = scanner.nextLong();
         } catch (Exception e) {
             System.out.println("Erro: O valor do depósito deve ser um número válido.");
-            scanner.nextLine(); 
-            return; 
+            scanner.nextLine();
+            return;
         }
 
         var investiment = investmentRepository.create(tax, initialFunds);
@@ -153,31 +153,32 @@ public class App {
         System.out.println("Digite a chave pix da conta de origem:");
         var pix = scanner.next();
 
-        // Regex para garantir que a chave Pix não contenha caracteres especiais
-        String regex = "^[a-zA-Z0-9]+$"; // Apenas letras e números, sem caracteres especiais.
+        String regex = "^[a-zA-Z0-9]+$";
 
-        // Validar se a chave Pix não contém caracteres especiais
         if (!pix.matches(regex)) {
             System.out.println("Erro: A chave Pix não pode conter caracteres especiais!");
-            return; // Retorna ao menu principal
+            return;
         }
 
-        // Verificar se a chave Pix existe na base de dados
         var account = accountRepository.findByPix(pix);
         if (account == null) {
             System.out.println("Erro: Conta não encontrada para a chave Pix informada.");
-            return; // Retorna ao menu principal
+            return;
         }
 
         System.out.println("Digite o identificador do investimento:");
         int investimentId;
         try {
-            investimentId = scanner.nextInt(); // Ler o identificador do investimento
+            investimentId = scanner.nextInt();
             var investmentWallet = investmentRepository.initInvestment(account, investimentId);
-            System.out.println("Carteira de investimento " + investmentWallet + " criada com sucesso!");
+            System.out.println("Carteira de investimento criada com sucesso!");
+            System.out.println("Serviço: " + investmentWallet.getService());
+            System.out.println("Saldo inicial: R$" + investmentWallet.getFunds());
+            System.out.println("Transações registradas: " + investmentWallet.getFinancialTransactions().size());
+
         } catch (Exception ex) {
             System.out.println("Erro: Identificador de investimento inválido.");
-            scanner.nextLine(); // Limpar o buffer do scanner para evitar loop infinito
+            scanner.nextLine();
         }
     }
 
@@ -220,10 +221,15 @@ public class App {
             } else {
                 filtered.forEach((Map.Entry<OffsetDateTime, List<MoneyAudit>> entry) -> {
                     String timestamp = entry.getKey().truncatedTo(ChronoUnit.SECONDS).toString();
-                    String details = entry.getValue().stream()
-                            .map(MoneyAudit::description)
+                    var grouped = entry.getValue().stream()
+                            .collect(Collectors.groupingBy(MoneyAudit::description, Collectors.counting()));
+
+                    String details = grouped.entrySet().stream()
+                            .map(e -> e.getKey() + " (x" + e.getValue() + ")")
                             .collect(Collectors.joining(", "));
+
                     System.out.println(timestamp + " - " + details);
+
                 });
             }
 
@@ -259,11 +265,21 @@ public class App {
     }
 
     private static void deposit() {
-        System.out.println("Digite a chave pix da conta que deseja depositar:");
-        var pix = scanner.next();
-        System.out.println("Digite o valor do depósito:");
-        var amount = scanner.nextLong();
-        accountRepository.deposit(pix, amount);
+        try {
+            System.out.println("Digite a chave pix da conta que deseja depositar:");
+            var pix = scanner.next();
+            System.out.println("Digite o valor do depósito:");
+            var amount = scanner.nextLong();
+
+            accountRepository.deposit(pix, amount);
+
+            System.out.println("Depósito de R$" + amount + " realizado com sucesso!");
+
+        } catch (AccountNotFoundException e) {
+            System.out.println("Erro ao realizar o depósito: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Erro inesperado: " + e.getMessage());
+        }
     }
 
     private static void withdraw() {
@@ -272,7 +288,11 @@ public class App {
         System.out.println("Digite o valor do saque:");
         var amount = scanner.nextLong();
         try {
-            accountRepository.withdraw(pix, amount);
+            long withdrawnAmount = accountRepository.withdraw(pix, amount);
+            var account = accountRepository.findByPix(pix);
+            long saldoAtual = account.getFunds();
+            System.out.println("Saque de R$" + withdrawnAmount + " realizado com sucesso!");
+            System.out.println("Saldo atual da conta: R$" + saldoAtual);
         } catch (NoFundsEnoughtException | AccountNotFoundException e) {
             System.out.println("Erro ao realizar o saque: " + e.getMessage());
         }
@@ -283,11 +303,22 @@ public class App {
         var source = scanner.next();
         System.out.println("Digite a chave pix da conta de destino:");
         var target = scanner.next();
+        System.out.println("Digite o valor da transferência:");
         var amount = scanner.nextLong();
+
         try {
             accountRepository.transfer(source, target, amount);
+
+            var sourceAccount = accountRepository.findByPix(source);
+            long saldoAtual = sourceAccount.getFunds();
+
+            System.out.println("Transferência de R$" + amount + " realizada com sucesso!");
+            System.out.println("Saldo atual da conta de origem (" + source + "): R$" + saldoAtual);
+
         } catch (AccountNotFoundException e) {
             System.out.println("Erro ao realizar a transferência: " + e.getMessage());
+        } catch (NoFundsEnoughtException e) {
+            System.out.println("Erro ao realizar a transferência: saldo insuficiente.");
         }
     }
 

@@ -2,7 +2,6 @@ package br.com.dio.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -12,13 +11,25 @@ import lombok.ToString;
 @Getter
 public class Money {
 
-private final List<MoneyAudit> history = new ArrayList<>();
+    private final List<MoneyAudit> history = new ArrayList<>();
 
     public Money(final MoneyAudit history) {
-        this.history.add(history);
+        if (!isTransactionDuplicate(history)) {
+            this.history.add(history);
+        }
     }
 
     public void addHistory(final MoneyAudit history) {
-        this.history.add(history);
+        if (!isTransactionDuplicate(history)) {
+            this.history.add(history);
+        }
+    }
+
+    private boolean isTransactionDuplicate(MoneyAudit history) {
+        if (history == null || history.transactionId() == null) {
+            return false;
+        }
+        return this.history.stream()
+                .anyMatch(existing -> existing.transactionId().equals(history.transactionId()));
     }
 }
