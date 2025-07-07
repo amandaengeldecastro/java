@@ -243,4 +243,96 @@ Investimento atualizado com sucesso!
 ========================================
 ```
 
-> Execução da listagem de contas, investimentos e carteiras passará por refatoração
+> Execução da listagem de contas, investimentos e carteiras
+```
+========================================
+Seja bem-vindo(a) ao DIOBank!
+Selecione a opção desejada!
+========================================
+1  - Criar uma conta
+2  - Criar um investimento
+3  - Fazer um investimento
+4  - Depositar na conta
+5  - Sacar da conta
+6  - Transferir entre contas
+7  - Investir
+8  - Sacar investimento
+9  - Listar contas
+10 - Listar investimento
+11 - Listar carteiras de investimento
+12 - Atualizar investimento
+13 - Historico de conta
+14 - Sair
+========================================
+1
+Digite as chaves pix que deseja cadastrar (separadas por ponto&virgula - ';'):
+teste
+Digite o valor inicial de depósito:
+150
+Criando AccountWallet com saldo inicial: 150
+Adicionando valor = 150, descrição = valor de criação da conta
+Saldo atual: R$ 150
+Saldo após criação: 150
+Chave(s) pix: [teste] criada(s) com sucesso!
+========================================
+1  - Criar uma conta
+2  - Criar um investimento
+3  - Fazer um investimento
+4  - Depositar na conta
+5  - Sacar da conta
+6  - Transferir entre contas
+7  - Investir
+8  - Sacar investimento
+9  - Listar contas
+10 - Listar investimento
+11 - Listar carteiras de investimento
+12 - Atualizar investimento
+13 - Historico de conta
+14 - Sair
+========================================
+2
+Digite a taxa de investimento:
+10
+Digite o valor inicial de depósito:
+150
+Investimento de id 1 no valor de R$150 com taxa de 10%, criado com sucesso!
+========================================
+1  - Criar uma conta
+2  - Criar um investimento
+3  - Fazer um investimento
+4  - Depositar na conta
+5  - Sacar da conta
+6  - Transferir entre contas
+7  - Investir
+8  - Sacar investimento
+9  - Listar contas
+10 - Listar investimento
+11 - Listar carteiras de investimento
+12 - Atualizar investimento
+13 - Historico de conta
+14 - Sair
+========================================
+9
+Chaves Pix: [teste]
+Saldo: R$150
+========================================
+1  - Criar uma conta
+2  - Criar um investimento
+3  - Fazer um investimento
+4  - Depositar na conta
+5  - Sacar da conta
+6  - Transferir entre contas
+7  - Investir
+8  - Sacar investimento
+9  - Listar contas
+10 - Listar investimento
+11 - Listar carteiras de investimento
+12 - Atualizar investimento
+13 - Historico de conta
+14 - Sair
+========================================
+10
+Investimento ID: 1
+Valor inicial: R$150
+Taxa: 10%
+```

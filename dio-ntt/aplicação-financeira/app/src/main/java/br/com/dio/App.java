@@ -72,13 +72,24 @@ public class App {
                     rescueInvestment();
                     break;
                 case 9:
-                    accountRepository.list().forEach(System.out::println);
+                    accountRepository.list().forEach(wallet -> {
+                        System.out.println("Chaves Pix: " + wallet.getPix());
+                        System.out.println("Saldo: R$" + wallet.getFunds());
+                    });
                     break;
                 case 10:
-                    investmentRepository.list().forEach(System.out::println);
+                    investmentRepository.list().forEach(investment -> {
+                        System.out.println("Investimento ID: " + investment.id());
+                        System.out.println("Valor inicial: R$" + investment.initialFunds());
+                        System.out.println("Taxa: " + investment.tax() + "%");
+                    });
                     break;
                 case 11:
-                    investmentRepository.listWallets().forEach(System.out::println);
+                    investmentRepository.listWallets().forEach(wallet -> {
+                        System.out.println("Serviço (Carteira ID): " + wallet.getService());
+                        System.out.println("Saldo: R$" + wallet.getFunds());
+                        System.out.println("Transações registradas: " + wallet.getFinancialTransactions().size());
+                    });
                     break;
                 case 12: {
                     investmentRepository.updateAmount();
