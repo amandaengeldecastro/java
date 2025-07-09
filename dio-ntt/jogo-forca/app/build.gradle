@@ -1,0 +1,38 @@
+/*
+ * Arquivo app/build.gradle ajustado
+ */
+
+plugins {
+    // Plugin para aplicações Java (linha de comando)
+    id 'application'
+    id 'java'
+}
+
+repositories {
+    // Usar Maven Central para baixar dependências
+    mavenCentral()
+}
+
+dependencies {
+    // Pode remover esta linha se não estiver usando a biblioteca Guava:
+    // implementation libs.guava
+}
+
+testing {
+    suites {
+        test {
+            useJUnit('4.13.2') // Isso é ok se você estiver usando JUnit 4
+        }
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+application {
+    // Corrigido para a classe principal correta do seu projeto:
+    mainClass = 'org.hangman.App'
+}

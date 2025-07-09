@@ -1,0 +1,5 @@
+/*
+ * Arquivo settings.gradle
+ */
+rootProject.name = 'hangman'
+include('app')
